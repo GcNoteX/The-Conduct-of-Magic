@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqgnjiq4u557p"]
+
+[ext_resource type="Script" path="res://Customers/customer.gd" id="1_uge4w"]
+[ext_resource type="Texture2D" uid="uid://b4xgowr6tumq" path="res://Assets/placeholder_customer_sprite.png" id="2_j2n26"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qlim7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j2n26")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_horek"]
+size = Vector2(70, 111)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q85ae"]
+size = Vector2(20, 132)
+
+[node name="Customer" type="Area2D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_uge4w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3.75, 4)
+sprite_frames = SubResource("SpriteFrames_qlim7")
+frame_progress = 0.743216
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_horek")
+
+[node name="detection_area2" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area2"]
+position = Vector2(111, 2)
+shape = SubResource("RectangleShape2D_q85ae")
+
+[node name="MovingReactionTime" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Testing_LeaveAfterOrder" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="detection_area2" to="." method="_on_detection_area_2_area_entered"]
+[connection signal="area_exited" from="detection_area2" to="." method="_on_detection_area_2_area_exited"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

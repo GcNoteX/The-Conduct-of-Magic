@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://byawkgm6ltq3a"]
+
+[ext_resource type="Script" path="res://RunePicking/Main/rp_game_manager_2.gd" id="1_37ick"]
+[ext_resource type="PackedScene" uid="uid://dby7tucwno5b5" path="res://RunePicking/Main/rp_map_generator.tscn" id="2_oy8v0"]
+[ext_resource type="PackedScene" uid="uid://baw6jx7bvw1cc" path="res://RunePicking/HUD/stamina_bar.tscn" id="3_3demd"]
+[ext_resource type="PackedScene" uid="uid://d164mj1wu1tmj" path="res://RunePicking/Player/rp_player.tscn" id="4_7qkli"]
+
+[node name="RpLevelTest2" type="Node2D"]
+script = ExtResource("1_37ick")
+
+[node name="RpMapGenerator" parent="." instance=ExtResource("2_oy8v0")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StaminaBar" parent="CanvasLayer" instance=ExtResource("3_3demd")]
+
+[node name="Player" parent="." instance=ExtResource("4_7qkli")]

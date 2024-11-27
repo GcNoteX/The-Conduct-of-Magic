@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqgnjiq4u557p"]
+
+[ext_resource type="Texture2D" uid="uid://fnaut078dai" path="res://Assets/icon.svg" id="1_78akq"]
+[ext_resource type="Script" path="res://Customers/customer.gd" id="1_uge4w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qlim7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_78akq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mqv42"]
+size = Vector2(155, 123)
+
+[node name="Customer" type="CharacterBody2D"]
+script = ExtResource("1_uge4w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qlim7")
+frame_progress = 0.712007
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(138.5, 0.5)
+shape = SubResource("RectangleShape2D_mqv42")
+
+[node name="detection_area2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area2"]
+
+[connection signal="body_entered" from="detection_area2" to="." method="_on_detection_area_2_body_entered"]

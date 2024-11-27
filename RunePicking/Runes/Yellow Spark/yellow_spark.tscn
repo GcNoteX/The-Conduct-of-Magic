@@ -1,0 +1,163 @@
+[gd_scene load_steps=21 format=3 uid="uid://dwwqva68c7kpk"]
+
+[ext_resource type="Texture2D" uid="uid://dcuwg1d3mj00x" path="res://RunePicking/Runes/Yellow Spark/Yellow Spark Blinking (8x8).png" id="1_cdbg2"]
+[ext_resource type="Script" path="res://RunePicking/Runes/Yellow Spark/yellow_spark.gd" id="1_ki0dx"]
+[ext_resource type="Texture2D" uid="uid://qhmn3ng75d6p" path="res://RunePicking/Runes/Yellow Spark/Yellow Spark Rotating (8x8).png" id="1_uce52"]
+[ext_resource type="Texture2D" uid="uid://bkqh72l8kxc8i" path="res://RunePicking/Runes/Yellow Spark/Yellow Spark Sealed (16x16).png" id="4_1n7od"]
+[ext_resource type="AudioStream" uid="uid://b3v0r8fda5lt6" path="res://RunePicking/Runes/Rune Assets/coin pickup sfx (Pixabay).mp3" id="5_36kfh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfvkk"]
+atlas = ExtResource("1_cdbg2")
+region = Rect2(4, 5, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfh8v"]
+atlas = ExtResource("1_cdbg2")
+region = Rect2(20, 5, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwbmr"]
+atlas = ExtResource("1_cdbg2")
+region = Rect2(36, 5, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut2df"]
+atlas = ExtResource("1_cdbg2")
+region = Rect2(52, 5, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfm5i"]
+atlas = ExtResource("1_uce52")
+region = Rect2(4, 5, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5smnv"]
+atlas = ExtResource("1_uce52")
+region = Rect2(20, 5, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvbux"]
+atlas = ExtResource("1_uce52")
+region = Rect2(36, 5, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_731nh"]
+atlas = ExtResource("4_1n7od")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o5bd"]
+atlas = ExtResource("4_1n7od")
+region = Rect2(16, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yrww"]
+atlas = ExtResource("4_1n7od")
+region = Rect2(32, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snxwc"]
+atlas = ExtResource("4_1n7od")
+region = Rect2(48, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_libt6"]
+atlas = ExtResource("4_1n7od")
+region = Rect2(64, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5auky"]
+atlas = ExtResource("4_1n7od")
+region = Rect2(80, 8, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3fki1"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_vfvkk")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_bfh8v")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_xwbmr")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_ut2df")
+}],
+"loop": true,
+"name": &"Awakened Blinking",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_wfm5i")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_5smnv")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_bvbux")
+}],
+"loop": true,
+"name": &"Awakened Rotating",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_731nh")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_7o5bd")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_3yrww")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_snxwc")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_libt6")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_5auky")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_5auky")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_libt6")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_snxwc")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_3yrww")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_7o5bd")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_731nh")
+}],
+"loop": true,
+"name": &"Sealed",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i88uu"]
+radius = 2.0
+
+[node name="Yellow Spark" type="Node2D" groups=["Spark"]]
+position = Vector2(200, 200)
+scale = Vector2(2, 2)
+script = ExtResource("1_ki0dx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_3fki1")
+animation = &"Awakened Rotating"
+autoplay = "Sealed"
+
+[node name="sfx_activate_node" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_36kfh")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_i88uu")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

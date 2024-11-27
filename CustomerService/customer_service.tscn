@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://ihf12qmq1lro"]
+
+[ext_resource type="Script" path="res://CustomerService/cs_game_manager.gd" id="1_m6mex"]
+[ext_resource type="PackedScene" uid="uid://dcakt3gulhmxh" path="res://CustomerService/cs_actions_choice.tscn" id="2_7pbrr"]
+[ext_resource type="PackedScene" uid="uid://bt5wqt4j5vfsb" path="res://CustomerService/shop.tscn" id="3_rp63m"]
+
+[node name="CustomerService" type="Node"]
+script = ExtResource("1_m6mex")
+
+[node name="Bottom UI" type="Control" parent="."]
+layout_mode = 3
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Ensure scale well" type="ColorRect" parent="Bottom UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxOfUI" type="HBoxContainer" parent="Bottom UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="CurrentCustomer" type="PanelContainer" parent="Bottom UI/HBoxOfUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="Bottom UI/HBoxOfUI/CurrentCustomer"]
+layout_mode = 2
+color = Color(1.05888e-06, 0.485999, 0.486744, 1)
+
+[node name="Label" type="Label" parent="Bottom UI/HBoxOfUI/CurrentCustomer"]
+layout_mode = 2
+text = "Custtomer"
+horizontal_alignment = 1
+
+[node name="CommisionPaper" type="PanelContainer" parent="Bottom UI/HBoxOfUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="Bottom UI/HBoxOfUI/CommisionPaper"]
+layout_mode = 2
+color = Color(0.629052, 0.256975, 0.556, 1)
+
+[node name="Label" type="Label" parent="Bottom UI/HBoxOfUI/CommisionPaper"]
+layout_mode = 2
+text = "Paper"
+horizontal_alignment = 1
+
+[node name="CsActionsChoice" parent="Bottom UI/HBoxOfUI" instance=ExtResource("2_7pbrr")]
+layout_mode = 2
+
+[node name="Shop" parent="." instance=ExtResource("3_rp63m")]
+unique_name_in_owner = true

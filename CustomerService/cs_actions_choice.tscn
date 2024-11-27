@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcakt3gulhmxh"]
+
+[ext_resource type="Script" path="res://CustomerService/cs_actions_choice.gd" id="1_8q4ef"]
+
+[node name="CsActionsChoice" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_8q4ef")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.890844, 0.650416, 0.563425, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Accept_Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Accept"
+
+[node name="Reject_Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Reject"
+
+[node name="End_Day_Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "End Day
+"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Accept_Button" to="." method="_on_accept_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Reject_Button" to="." method="_on_reject_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/End_Day_Button" to="." method="_on_end_day_button_pressed"]

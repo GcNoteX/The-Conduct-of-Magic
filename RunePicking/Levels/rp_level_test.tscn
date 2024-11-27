@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://1dsmxtislpk3"]
+
+[ext_resource type="Script" path="res://RunePicking/Main/rp_game_manager.gd" id="1_ewpkv"]
+[ext_resource type="PackedScene" uid="uid://d164mj1wu1tmj" path="res://Player/rp_player.tscn" id="2_oqg3w"]
+[ext_resource type="PackedScene" uid="uid://cad1ewyqamv5o" path="res://RunePicking/Runes/general_rune.tscn" id="5_x5il3"]
+[ext_resource type="Resource" uid="uid://by5pn5f760ji0" path="res://RunePicking/Runes/rune_types/blank_rune.tres" id="6_50i38"]
+[ext_resource type="PackedScene" uid="uid://demwldiqqee3w" path="res://Artifacts/Large Sword Artifact/ar_large_sword.tscn" id="6_leh6r"]
+
+[node name="TestWorld2" type="Node2D"]
+script = ExtResource("1_ewpkv")
+
+[node name="player_cursor" parent="." instance=ExtResource("2_oqg3w")]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(608, 384)
+
+[node name="FinalLine" type="Line2D" parent="."]
+top_level = true
+points = PackedVector2Array(529, 380)
+width = 3.0
+default_color = Color(0.286275, 1, 1, 1)
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[node name="ArLargeSword" parent="." instance=ExtResource("6_leh6r")]
+position = Vector2(831, 395)
+scale = Vector2(0.5, 0.5)
+
+[node name="BlankRune" parent="." instance=ExtResource("5_x5il3")]
+position = Vector2(666, 404)
+rune_data = ExtResource("6_50i38")
+
+[node name="BlankRune2" parent="." instance=ExtResource("5_x5il3")]
+position = Vector2(631, 516)
+rune_data = ExtResource("6_50i38")
+
+[node name="BlankRune3" parent="." instance=ExtResource("5_x5il3")]
+position = Vector2(582, 477)
+rune_data = ExtResource("6_50i38")

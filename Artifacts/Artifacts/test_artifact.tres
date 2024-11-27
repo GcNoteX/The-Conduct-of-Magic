@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=6 format=3 uid="uid://cm0qxl3epiqd7"]
+
+[ext_resource type="Script" path="res://RunePicking/Runes/rune_stats.gd" id="1_r6hw0"]
+[ext_resource type="Script" path="res://Artifacts/Artifacts/artifacts.gd" id="1_xana5"]
+[ext_resource type="Resource" uid="uid://by5pn5f760ji0" path="res://RunePicking/Runes/rune_types/blank_rune.tres" id="2_uxgo3"]
+[ext_resource type="Resource" uid="uid://chginwnxc0yre" path="res://RunePicking/Runes/rune_types/blank_rune_2.tres" id="3_qyo2n"]
+[ext_resource type="Texture2D" uid="uid://nkbx0jirxkvs" path="res://Artifacts/Large Sword Artifact/Large Sword.png" id="4_vk5ns"]
+
+[resource]
+script = ExtResource("1_xana5")
+name = "Large Sword"
+sprite = ExtResource("4_vk5ns")
+max_number_of_runes = 5
+runes = Array[ExtResource("1_r6hw0")]([ExtResource("2_uxgo3"), ExtResource("2_uxgo3"), ExtResource("2_uxgo3"), ExtResource("3_qyo2n"), ExtResource("3_qyo2n")])

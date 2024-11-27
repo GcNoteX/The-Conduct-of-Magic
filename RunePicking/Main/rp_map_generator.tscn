@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dby7tucwno5b5"]
+
+[ext_resource type="Script" path="res://RunePicking/Main/rp_map_generator.gd" id="1_23cyf"]
+[ext_resource type="Resource" uid="uid://cm0qxl3epiqd7" path="res://Artifacts/Artifacts/test_artifact.tres" id="2_o664q"]
+
+[node name="RpMapGenerator" type="Node2D"]
+script = ExtResource("1_23cyf")
+artifact_data = ExtResource("2_o664q")

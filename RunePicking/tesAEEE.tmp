@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://1dsmxtislpk3"]
+
+[ext_resource type="Script" path="res://Scripts/test_spell_crafting_game_manager.gd" id="1_2gwro"]
+[ext_resource type="PackedScene" uid="uid://d164mj1wu1tmj" path="res://Nodes/test_spell_crafting_player.tscn" id="3_isb81"]
+[ext_resource type="PackedScene" uid="uid://pnijm2wr7mav" path="res://Nodes/test_spell_crafting_points_ui.tscn" id="5_nn0hk"]
+[ext_resource type="PackedScene" uid="uid://dwwqva68c7kpk" path="res://Nodes/Yellow Spark/yellow_spark.tscn" id="6_c0amh"]
+
+[node name="TestWorld2" type="Node2D"]
+script = ExtResource("1_2gwro")
+
+[node name="player_cursor" parent="." instance=ExtResource("3_isb81")]
+unique_name_in_owner = true
+position = Vector2(608, 384)
+
+[node name="PointsUI" parent="." instance=ExtResource("5_nn0hk")]
+
+[node name="Yellow Spark" parent="." instance=ExtResource("6_c0amh")]
+position = Vector2(509, 481)
+
+[node name="Yellow Spark2" parent="." instance=ExtResource("6_c0amh")]
+position = Vector2(409, 572)
+
+[node name="Yellow Spark3" parent="." instance=ExtResource("6_c0amh")]
+position = Vector2(575, 543)
+
+[node name="Yellow Spark4" parent="." instance=ExtResource("6_c0amh")]
+position = Vector2(533, 386)
+
+[node name="Yellow Spark5" parent="." instance=ExtResource("6_c0amh")]
+position = Vector2(376, 499)
+
+[node name="Yellow Spark6" parent="." instance=ExtResource("6_c0amh")]
+position = Vector2(443, 491)
+
+[node name="Yellow Spark7" parent="." instance=ExtResource("6_c0amh")]
+position = Vector2(577, 469)
+
+[node name="FinalLine" type="Line2D" parent="."]
+top_level = true
+width = 3.0
+default_color = Color(0.286275, 1, 1, 1)
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true

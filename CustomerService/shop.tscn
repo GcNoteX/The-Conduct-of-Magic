@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt5wqt4j5vfsb"]
+
+[ext_resource type="Texture2D" uid="uid://by64vw05sk7da" path="res://Assets/ProtoType Background.png" id="1_mtkxd"]
+[ext_resource type="Script" path="res://CustomerService/cs_shop_manager.gd" id="1_ve51m"]
+[ext_resource type="PackedScene" uid="uid://bfp5y3y1l2uuc" path="res://Player/cs_player.tscn" id="3_3u4jr"]
+
+[node name="Shop" type="Node2D"]
+script = ExtResource("1_ve51m")
+
+[node name="background" type="Sprite2D" parent="."]
+texture = ExtResource("1_mtkxd")
+centered = false
+
+[node name="CsPlayer" parent="." instance=ExtResource("3_3u4jr")]
+position = Vector2(1071, 214)
+
+[node name="CustomerSpawnInterval" type="Timer" parent="."]
+
+[connection signal="timeout" from="CustomerSpawnInterval" to="." method="_on_customer_spawn_interval_timeout"]

@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://byawkgm6ltq3a"]
+
+[ext_resource type="Script" path="res://RunePicking/Main/rp_game_manager.gd" id="1_37ick"]
+[ext_resource type="PackedScene" uid="uid://dby7tucwno5b5" path="res://RunePicking/Main/rp_map_generator.tscn" id="2_oy8v0"]
+[ext_resource type="Resource" uid="uid://cm0qxl3epiqd7" path="res://Artifacts/Artifacts/test_artifact.tres" id="2_r5tp5"]
+[ext_resource type="PackedScene" uid="uid://baw6jx7bvw1cc" path="res://RunePicking/HUD/stamina_bar.tscn" id="3_3demd"]
+[ext_resource type="PackedScene" uid="uid://d164mj1wu1tmj" path="res://Player/rp_player.tscn" id="4_7qkli"]
+
+[node name="RpLevelTest2" type="Node2D"]
+script = ExtResource("1_37ick")
+artifact_data = ExtResource("2_r5tp5")
+
+[node name="Player" parent="." instance=ExtResource("4_7qkli")]
+z_index = 1
+z_as_relative = false
+
+[node name="RpMapGenerator" parent="." instance=ExtResource("2_oy8v0")]
+z_index = 1
+z_as_relative = false
+artifact_data = null
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.482353, 1, 1, 0.133333)
+
+[node name="StaminaBar" parent="CanvasLayer" instance=ExtResource("3_3demd")]
+z_as_relative = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -273.5
+offset_right = 273.5
+offset_bottom = 69.0
+grow_vertical = 1
+metadata/_edit_use_anchors_ = true
