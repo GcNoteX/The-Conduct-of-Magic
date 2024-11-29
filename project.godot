@@ -15,6 +15,10 @@ run/main_scene="res://RunePicking/Levels/rp_level_test2.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
+[autoload]
+
+save_manager="*res://main/save_manager.gd"
+
 [gui]
 
 theme/default_font_multichannel_signed_distance_field=true
