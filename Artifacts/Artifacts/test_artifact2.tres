@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Artifact" load_steps=6 format=3 uid="uid://c5mnltevycqjr"]
+
+[ext_resource type="Script" path="res://RunePicking/Runes/rune_stats.gd" id="1_yoob7"]
+[ext_resource type="Script" path="res://Artifacts/Artifacts/artifacts.gd" id="2_aulp2"]
+[ext_resource type="Resource" uid="uid://chginwnxc0yre" path="res://RunePicking/Runes/rune_types/blank_rune_2.tres" id="2_ou4jq"]
+[ext_resource type="Resource" uid="uid://by5pn5f760ji0" path="res://RunePicking/Runes/rune_types/blank_rune.tres" id="3_eg30h"]
+[ext_resource type="Texture2D" uid="uid://nkbx0jirxkvs" path="res://Artifacts/Large Sword Artifact/Large Sword.png" id="5_8f4hi"]
+
+[resource]
+script = ExtResource("2_aulp2")
+name = "Mini Sword"
+sprite = ExtResource("5_8f4hi")
+max_number_of_runes = 5
+runes = Array[ExtResource("1_yoob7")]([ExtResource("2_ou4jq"), ExtResource("2_ou4jq"), ExtResource("3_eg30h")])

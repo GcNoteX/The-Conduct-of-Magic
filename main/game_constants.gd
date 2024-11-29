@@ -24,3 +24,12 @@ const GenericNames = [
 	"Hannah",
 	"Isaac"
 ]
+
+const artifact_path = "res://Artifacts/Artifacts/"
+
+const ArtifactPool: Dictionary = {
+	ParentWorkShop = [
+		"test_artifact.tres",
+		"test_artifact2.tres"
+	]
+}

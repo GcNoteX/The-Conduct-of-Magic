@@ -7,6 +7,7 @@ extends Node
 @onready var shop: ShopManager = %Shop
 @onready var actions_UI: ActionsUI  = $"Bottom UI/HBoxOfUI/CsActionsChoice"
 
+var all_customers: Array[Customer] # The total customer to keep track of between days
 var customers: Array[Customer] = []
 var current_customer: Variant = null # This would either be a customer object or no one -> null
 var day_ended: bool = false
@@ -20,8 +21,8 @@ func _ready() -> void:
 	# Customer's initialization is based on previous customers returning,
 	#  the need to make new customers, special customers, region
 	
-	var no_of_customers = randi_range(4, 20)
-	# TODO: Generate new customers
+	var no_of_customers = randi_range(3, 5)
+	# TODO: Generate new customers DONE
 	for i in range(no_of_customers):
 		# Make a customer object
 		var customer_instance = customer.instantiate() as Customer
@@ -29,13 +30,11 @@ func _ready() -> void:
 		
 		# Make an instance of a customer data resource THIS PART IS ONLY NEEDED FOR NONE SPECIAL NPCs
 		var customer_resource: CustomerData = load("res://Customers/customer_data.gd").new()
-		customer_resource.prepare_character(GameConstants.Locations.ParentsWorkshop)
-		# Run it on a function written in the customer script to insert all the values
-		customer_instance.fill_in_customer_data(customer_resource)
+		# TODO: Make customers unique based on their other attributes DONE
+		customer_instance.fill_in_customer_data(customer_resource, GameConstants.Locations.ParentsWorkshop)
 		
 		customers.append(customer_instance)
 		
-	# TODO: Make customers unique based on their other attributes
 	# TODO: Insert in customers coming back to get their order
 	# TODO: Insert check on whether new customers need to be generated
 	# TODO: Insert in special customers

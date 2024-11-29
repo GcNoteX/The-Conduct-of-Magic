@@ -20,7 +20,7 @@ func initialize(customers_for_shop: Array[Customer]) -> void:
 func _send_customer_to_shop(customer: Customer) -> void:
 	self.add_child.call_deferred(customer)
 	customer.position = customer_spawn_position
-	print(customer.customer_name)
+	print(customer.customer_name, "," ,customer.commission.artifact.name, ",", customer.patience, ",", customer.commission.commission_due_date, ",", customer.richness, "," ,customer.commission.reward, "," ,customer.commission.speculative_runes)
 	customers_spawned += 1
 
 

@@ -5,8 +5,6 @@ extends Resource
 @export var name: String
 ## Which map the customer will be in
 @export var spawn_location: GameConstants.Locations 
-## Possible artifacts they may commission
-@export var owned_artifacts: Array[String]
 
 ## Dictates the behaviour of the customer when making comissions.
 @export_category("Personality")
@@ -32,11 +30,28 @@ var commission: CommissionData
 var return_day: int
 
 # Used to prepare a default and randomized instance of characters based on the location
-func prepare_character(location):
+func prepare_character_data(location):
+	# TODO: Make it location based
 	var generic_names = GameConstants.GenericNames
 	name = generic_names[randi() % len(generic_names)]
 	spawn_location = location
-	# TODO: Preparing the artifacts bsed on location
+	# TODO: Preparing the artifacts based on location
 	# TODO: Inserting dialogue
-	# TODO: varying values in the personality
 	
+	# TODO: personality biased based on location
+	richness = round(randf_range(0, 3) * 10)/10
+	patience = randi_range(0 ,5)
+	intelligence = randi_range(0, 5)
+	
+	# TODO: Make a commission for the npc 
+	# Get an artifact (None special NPCs only instance for one artifact so we just generate it based on a pool)
+	var artifact_pool: Array = GameConstants.ArtifactPool["ParentWorkShop"]
+	var random_artifact = artifact_pool[randi() % len(artifact_pool)]
+	var artifact_path = GameConstants.artifact_path + random_artifact 
+	var artifact: Artifact = load(artifact_path)
+	commission = generate_commission(artifact)
+	
+func generate_commission(artifact: Artifact) -> CommissionData:
+	var commission: CommissionData = load("res://CommissionPapers/commissions.gd").new()
+	commission.prepare_commission_data(self, artifact)
+	return commission

@@ -4,16 +4,17 @@ extends Area2D
 var customer_name: String
 # Which map the customer will be in
 var spawn_location: GameConstants.Locations 
-# Possible artifacts they may commission
-var owned_artifacts: Array[String]
 # How much they can pay the player for their job
-var richness: float  = 1
+var richness: float 
 # An added duration to how long it should take to solve the artifact before the customer comes back to receive
-var patience: int = 3
+var patience: int
 # Accuracy in determining the runes on a comissioned artifact
-var intelligence: int = 3
+var intelligence: int 
 # Customer dialogue
 var dialogue: Dictionary
+# Commission information
+var commission: CommissionData
+var return_day: int
 
 var initialized = false # Check if everything has been properly intialized for the shop day
 
@@ -27,15 +28,17 @@ var leaving = false
 
 signal send_order(customer: Customer) #TODO: Resource for the orders
 
-func fill_in_customer_data(data: CustomerData):
+func fill_in_customer_data(data: CustomerData, location):
+	data.prepare_character_data(location) # Fills in the customer resource with 'random' data
 	# The reason that we do not directly use the CustomerData is it makes it easier to store in JSON later
 	customer_name = data.name
 	spawn_location = data.spawn_location
-	owned_artifacts = data.owned_artifacts
 	richness = data.richness
 	patience = data.patience
 	intelligence = data.intelligence
 	dialogue = data.dialogue # TODO: Maybe for general customer make a constant file of dialogue so no redundant saves of dialogue text
+	commission = data.commission
+
 
 func _ready() -> void:
 	initialized = true
