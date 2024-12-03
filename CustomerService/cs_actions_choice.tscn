@@ -27,21 +27,43 @@ layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Accept_Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Commission_address" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="Accept_Button" type="Button" parent="MarginContainer/VBoxContainer/Commission_address"]
+layout_mode = 2
+size_flags_horizontal = 3
 disabled = true
 text = "Accept"
 
-[node name="Reject_Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Reject_Button" type="Button" parent="MarginContainer/VBoxContainer/Commission_address"]
 layout_mode = 2
+size_flags_horizontal = 3
 disabled = true
 text = "Reject"
+
+[node name="Commission_submission" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Return_Artifact_Button" type="Button" parent="MarginContainer/VBoxContainer/Commission_submission"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "Return Order"
+
+[node name="Failed_Button" type="Button" parent="MarginContainer/VBoxContainer/Commission_submission"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "Failed Order"
 
 [node name="End_Day_Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "End Day
 "
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Accept_Button" to="." method="_on_accept_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Reject_Button" to="." method="_on_reject_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Commission_address/Accept_Button" to="." method="_on_accept_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Commission_address/Reject_Button" to="." method="_on_reject_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Commission_submission/Return_Artifact_Button" to="." method="_on_return_artifact_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Commission_submission/Failed_Button" to="." method="_on_failed_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/End_Day_Button" to="." method="_on_end_day_button_pressed"]

@@ -40,7 +40,7 @@ func prepare_character_data(location):
 	
 	# TODO: personality biased based on location
 	richness = round(randf_range(0, 3) * 10)/10
-	patience = randi_range(0 ,5)
+	patience = randi_range(1 ,1)
 	intelligence = randi_range(0, 5)
 	
 	# TODO: Make a commission for the npc 

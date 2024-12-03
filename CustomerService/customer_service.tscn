@@ -63,3 +63,7 @@ layout_mode = 2
 
 [node name="Shop" parent="." instance=ExtResource("3_rp63m")]
 unique_name_in_owner = true
+
+[node name="TransitionToNextDay" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true

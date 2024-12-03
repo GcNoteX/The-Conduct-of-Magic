@@ -1,6 +1,7 @@
 class_name Customer
 extends Area2D
 
+var customer_id: int
 var customer_name: String
 # Which map the customer will be in
 var spawn_location: GameConstants.Locations 
@@ -15,12 +16,12 @@ var dialogue: Dictionary
 # Commission information
 var commission: CommissionData
 var return_day: int
+var is_returning: bool = false
 
-var initialized = false # Check if everything has been properly intialized for the shop day
 
 # Conditions to check for the customer's state
-var waiting = false
-var leaving = false
+var waiting
+var leaving
 
 @onready var moving_reaction_time: Timer = $MovingReactionTime
 @onready var testing_leaving_timer: Timer = $Testing_LeaveAfterOrder
@@ -31,6 +32,7 @@ signal send_order(customer: Customer) #TODO: Resource for the orders
 func fill_in_customer_data(data: CustomerData, location):
 	data.prepare_character_data(location) # Fills in the customer resource with 'random' data
 	# The reason that we do not directly use the CustomerData is it makes it easier to store in JSON later
+	customer_id = randi()
 	customer_name = data.name
 	spawn_location = data.spawn_location
 	richness = data.richness
@@ -39,13 +41,11 @@ func fill_in_customer_data(data: CustomerData, location):
 	dialogue = data.dialogue # TODO: Maybe for general customer make a constant file of dialogue so no redundant saves of dialogue text
 	commission = data.commission
 
-
 func _ready() -> void:
-	initialized = true
+	pass
 
 func _process(delta: float) -> void:
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	# Simply to control the movement direction of the customer
 	if leaving:
 		move_left()
 	elif !waiting:
@@ -58,21 +58,25 @@ func move_left() -> void:
 	position.x = position.x - 2	
 
 func determine_customer_action(body: Node2D) -> void:
-	# Stop customer from moving
-	waiting = true
-	
 	# Actions depending on condition
 	if body is CS_Player:
-		#print("I have reached the front! Let me send my order")
 		emit_signal("send_order", self)
 		
 	elif body is Customer:
 		# Actions if there is a customer in front.
-		#print("Customer ahead, lets wait...")
 		pass
 	else:
-		print("Unidentified body has been collided with! -> ", body)
-		
+		push_warning("Unidentified body has been collided with! -> ", body)
+
+func enter_store() -> void:
+	# Reset values - these values may had been modified when the player had left the store but is coming back.
+	waiting = false
+	leaving = false
+	
+	self.scale.x = 1
+	call_deferred("_assign_collision_layers_and_masks")
+	
+
 func leave_store() -> void:
 	if !leaving:
 		# self only has a layer it is on, the other area 2D is used to do the collision
@@ -80,24 +84,28 @@ func leave_store() -> void:
 		self.collision_layer = 0
 		detection_area.collision_mask = 0
 		self.scale.x = -1 # inverts the node
-		
-		# TODO: Ensure anything we need to save from the customer is done before it is destroyed in queue_free 
-		# when it leaves the store
 
 		leaving = true
 	
 func _on_detection_area_2_area_entered(area: Area2D) -> void:
-	#print(area, " entered")
+	# Stop customer from moving
+	waiting = true
+	
 	determine_customer_action(area)
 
 func _on_detection_area_2_area_exited(area: Area2D) -> void:
-	#print(area, " exited")
-	# Check if its another customer
-	if area is Customer:
+	# Check if its another customer and start moving again
+	if area is Customer: # The reason to check for a Customer is incase you exit the players hitbox
 		moving_reaction_time.start()
 		await moving_reaction_time.timeout
-		#print("Start moving")
 		waiting = false
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	self.queue_free()
+	if is_returning:
+		remove_child(self)
+	else:
+		queue_free()
+
+func _assign_collision_layers_and_masks():
+	self.collision_layer = 1 << 3
+	detection_area.collision_mask = (1 << 1) | (1 << 3)
