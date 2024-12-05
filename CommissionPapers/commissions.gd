@@ -17,7 +17,7 @@ func prepare_commission_data(customer: CustomerData, artifact_instance: Artifact
 	for rune in artifact_instance.runes:
 		speculative_runes = rune.rune_name + "," + speculative_runes
 	artifact_description = "This is a placeholder description of the artifact"
-	artifact_description = "This is a placeholder for the artifacts origin"
+	artifact_origin = "This is a placeholder for the artifacts origin"
 	
 	commission_due_date = customer.patience
 	reward = 10 * customer.richness

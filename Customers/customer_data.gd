@@ -3,6 +3,7 @@ extends Resource
 
 @export_category("General")
 @export var name: String
+@export var face_sprite: String
 ## Which map the customer will be in
 @export var spawn_location: GameConstants.Locations 
 
@@ -34,8 +35,10 @@ func prepare_character_data(location):
 	# TODO: Make it location based
 	var generic_names = GameConstants.GenericNames
 	name = generic_names[randi() % len(generic_names)]
+	var face_sprites = GameConstants.FaceSpritePool[location]
+	face_sprite = face_sprites[randi() % len(face_sprites)]
 	spawn_location = location
-	# TODO: Preparing the artifacts based on location
+	
 	# TODO: Inserting dialogue
 	
 	# TODO: personality biased based on location
@@ -45,8 +48,8 @@ func prepare_character_data(location):
 	
 	# TODO: Make a commission for the npc 
 	# Get an artifact (None special NPCs only instance for one artifact so we just generate it based on a pool)
-	var artifact_pool: Array = GameConstants.ArtifactPool["ParentWorkShop"]
-	var random_artifact = artifact_pool[randi() % len(artifact_pool)]
+	var artifact_pool: Array = GameConstants.ArtifactPool[location]
+	var random_artifact =  artifact_pool[randi() % len(artifact_pool)]
 	var artifact_path = GameConstants.artifact_path + random_artifact 
 	var artifact: Artifact = load(artifact_path)
 	commission = generate_commission(artifact)

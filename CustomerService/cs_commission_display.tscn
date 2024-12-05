@@ -1,0 +1,100 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5gufg2jd0vpb"]
+
+[ext_resource type="Script" path="res://CustomerService/cs_commission_display.gd" id="1_pwjib"]
+
+[node name="CsCommissionDisplay" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_pwjib")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.771905, 0.345176, 0.713894, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="LeftSide" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/LeftSide"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ArtifactPanel" type="PanelContainer" parent="HBoxContainer/LeftSide/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="ArtifactDisplay" type="TextureRect" parent="HBoxContainer/LeftSide/VBoxContainer/ArtifactPanel"]
+texture_filter = 1
+layout_mode = 2
+stretch_mode = 5
+
+[node name="RunesPanel" type="PanelContainer" parent="HBoxContainer/LeftSide/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RunesSpeculation" type="RichTextLabel" parent="HBoxContainer/LeftSide/VBoxContainer/RunesPanel"]
+layout_mode = 2
+
+[node name="RightSide" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/RightSide"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionPanel" type="PanelContainer" parent="HBoxContainer/RightSide/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/RightSide/VBoxContainer/DescriptionPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CommissionDescription" type="RichTextLabel" parent="HBoxContainer/RightSide/VBoxContainer/DescriptionPanel/MarginContainer"]
+layout_mode = 2
+scroll_active = false
+
+[node name="OriginPanel" type="PanelContainer" parent="HBoxContainer/RightSide/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/RightSide/VBoxContainer/OriginPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="OriginDescription" type="RichTextLabel" parent="HBoxContainer/RightSide/VBoxContainer/OriginPanel/MarginContainer"]
+layout_mode = 2
+scroll_active = false
+
+[node name="CostTimePanel" type="PanelContainer" parent="HBoxContainer/RightSide/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CostTimeSeperator" type="HBoxContainer" parent="HBoxContainer/RightSide/VBoxContainer/CostTimePanel"]
+layout_mode = 2
+
+[node name="Time" type="RichTextLabel" parent="HBoxContainer/RightSide/VBoxContainer/CostTimePanel/CostTimeSeperator"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Cost" type="RichTextLabel" parent="HBoxContainer/RightSide/VBoxContainer/CostTimePanel/CostTimeSeperator"]
+layout_mode = 2
+size_flags_horizontal = 3
+text_direction = 2

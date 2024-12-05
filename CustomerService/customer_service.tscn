@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ihf12qmq1lro"]
+[gd_scene load_steps=6 format=3 uid="uid://ihf12qmq1lro"]
 
 [ext_resource type="Script" path="res://CustomerService/cs_game_manager.gd" id="1_m6mex"]
 [ext_resource type="PackedScene" uid="uid://dcakt3gulhmxh" path="res://CustomerService/cs_actions_choice.tscn" id="2_7pbrr"]
+[ext_resource type="PackedScene" uid="uid://dydgiyi05g1cs" path="res://CustomerService/cs_customer_display.tscn" id="2_xmkxd"]
 [ext_resource type="PackedScene" uid="uid://bt5wqt4j5vfsb" path="res://CustomerService/shop.tscn" id="3_rp63m"]
+[ext_resource type="PackedScene" uid="uid://c5gufg2jd0vpb" path="res://CustomerService/cs_commission_display.tscn" id="3_swtyg"]
 
 [node name="CustomerService" type="Node"]
 script = ExtResource("1_m6mex")
@@ -32,31 +34,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="CurrentCustomer" type="PanelContainer" parent="Bottom UI/HBoxOfUI"]
+[node name="CsCustomerDisplay" parent="Bottom UI/HBoxOfUI" instance=ExtResource("2_xmkxd")]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="ColorRect" type="ColorRect" parent="Bottom UI/HBoxOfUI/CurrentCustomer"]
+[node name="CsCommissionDisplay" parent="Bottom UI/HBoxOfUI" instance=ExtResource("3_swtyg")]
 layout_mode = 2
-color = Color(1.05888e-06, 0.485999, 0.486744, 1)
-
-[node name="Label" type="Label" parent="Bottom UI/HBoxOfUI/CurrentCustomer"]
-layout_mode = 2
-text = "Custtomer"
-horizontal_alignment = 1
-
-[node name="CommisionPaper" type="PanelContainer" parent="Bottom UI/HBoxOfUI"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ColorRect" type="ColorRect" parent="Bottom UI/HBoxOfUI/CommisionPaper"]
-layout_mode = 2
-color = Color(0.629052, 0.256975, 0.556, 1)
-
-[node name="Label" type="Label" parent="Bottom UI/HBoxOfUI/CommisionPaper"]
-layout_mode = 2
-text = "Paper"
-horizontal_alignment = 1
 
 [node name="CsActionsChoice" parent="Bottom UI/HBoxOfUI" instance=ExtResource("2_7pbrr")]
 layout_mode = 2

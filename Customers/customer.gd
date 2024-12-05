@@ -3,6 +3,7 @@ extends Area2D
 
 var customer_id: int
 var customer_name: String
+var face_sprite: String
 # Which map the customer will be in
 var spawn_location: GameConstants.Locations 
 # How much they can pay the player for their job
@@ -34,15 +35,13 @@ func fill_in_customer_data(data: CustomerData, location):
 	# The reason that we do not directly use the CustomerData is it makes it easier to store in JSON later
 	customer_id = randi()
 	customer_name = data.name
+	face_sprite = data.face_sprite
 	spawn_location = data.spawn_location
 	richness = data.richness
 	patience = data.patience
 	intelligence = data.intelligence
 	dialogue = data.dialogue # TODO: Maybe for general customer make a constant file of dialogue so no redundant saves of dialogue text
 	commission = data.commission
-
-func _ready() -> void:
-	pass
 
 func _process(delta: float) -> void:
 	# Simply to control the movement direction of the customer

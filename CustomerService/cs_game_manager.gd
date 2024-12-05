@@ -5,6 +5,8 @@ extends Node
 @onready var customer: PackedScene = preload("res://Customers/customer.tscn") 
 
 @onready var shop: ShopManager = %Shop
+@onready var customer_display_UI: CustomerDisplay = $"Bottom UI/HBoxOfUI/CsCustomerDisplay"
+@onready var commission_dispay_UI: CommissionDisplay = $"Bottom UI/HBoxOfUI/CsCommissionDisplay"
 @onready var actions_UI: ActionsUI  = $"Bottom UI/HBoxOfUI/CsActionsChoice"
 
 var current_day: int = 1
@@ -69,11 +71,16 @@ func create_customer(location) -> Customer:
 # Things to do when the customer sends their order
 func process_customer(customer: Customer) -> void:
 	current_customer = customer
-	# Enable UI elements using data in the order
+	# Display customer in left widget
+	customer_display_UI.update_face(current_customer.face_sprite)
+	# Display commission/artifact submmission + actions UI elements 
 	if !customer.is_returning:
 		actions_UI.enable_request_actions()
+		commission_dispay_UI.update_commission_display(current_customer.commission)
 	elif customer.is_returning:
 		actions_UI.enable_submission_actions()
+		commission_dispay_UI.update_commission_display(current_customer.commission)
+		commission_dispay_UI.time_display.text = "HERE TO COLLECT!" # Just to test that we can identify returning and not returning
 	else:
 		push_error("Boolean is_returning has a none truth value!")
 
@@ -88,34 +95,28 @@ func order_accepted() -> void:
 	customers_booklist[current_customer.return_day].append(current_customer)
 	
 	# Make customer leave
-	current_customer.leave_store()
-	current_customer = null
+	customer_responded_to()
 	
 	# TODO: Save data
 	
-	emit_signal("customer_has_been_processed")
+	
 	
 func order_rejected() -> void:
 	print("Order has been rejected")
 	# Make customer leave
-	current_customer.leave_store()
-	current_customer = null
+	customer_responded_to()
 	
 	# TODO: Save data
-	
-	emit_signal("customer_has_been_processed")
 
 func artifact_returned() -> void:
 	print("Artifact returned!")
 	# Make customer leave
-	current_customer.leave_store()
-	current_customer = null
+	customer_responded_to()
 	
 func commission_failed() -> void:
 	print("Commission Failed!")
 	# Make customer leave
-	current_customer.leave_store()
-	current_customer = null
+	customer_responded_to()
 	
 func end_day() -> void:
 	print("Ending the day")
@@ -137,3 +138,9 @@ func end_day() -> void:
 	await $TransitionToNextDay.timeout
 	start_day()
 	
+func customer_responded_to() -> void:
+	current_customer.leave_store()
+	current_customer = null
+	customer_display_UI.clear_face()
+	commission_dispay_UI.clear_commission_display()
+	emit_signal("customer_has_been_processed")
