@@ -2,7 +2,7 @@ class_name RunePickingGameManager
 extends Node
 
 # Exports and preloading items
-@export var artifact_data: Artifact
+@export var artifact_data: ArtifactData
 
 # Initializing variables
 var can_start_playing: bool = false
@@ -16,7 +16,8 @@ var active_drain: float = 20
 var previous_position: Vector2 = Vector2(-1, -1)
 var awakened_runes_count: int = 0
 var total_runes_count: int = 0
-@onready var player = $Player as RunePickingPlayer
+
+@onready var player = $Player as RpPlayer
 @onready var player_hitbox = $Player/cursor_collision_box as CollisionShape2D
 @onready var stamina_bar = $CanvasLayer/StaminaBar as StaminaBar
 @onready var rune_map = $RpMapGenerator as RunePickingMapGenerator

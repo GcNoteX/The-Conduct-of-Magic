@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CommissionData" load_steps=3 format=3 uid="uid://ddyxl7s820qer"]
+
+[ext_resource type="Resource" uid="uid://cm0qxl3epiqd7" path="res://Artifacts/Artifacts/test_artifact.tres" id="1_jh7gk"]
+[ext_resource type="Script" path="res://CommissionPapers/commissions.gd" id="1_ytaj2"]
+
+[resource]
+script = ExtResource("1_ytaj2")
+artifact = ExtResource("1_jh7gk")
+speculative_runes = ""
+artifact_description = "test dec1"
+artifact_origin = "test origin1"
+commission_due_date = 5
+reward = 32.0

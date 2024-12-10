@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnb37u7lbfh0d"]
+
+[ext_resource type="Script" path="res://RunePicking/Main/rp_level_display.gd" id="1_l001y"]
+[ext_resource type="Resource" uid="uid://by5pn5f760ji0" path="res://RunePicking/Runes/rune_types/blank_rune.tres" id="2_hpchi"]
+[ext_resource type="Resource" uid="uid://chginwnxc0yre" path="res://RunePicking/Runes/rune_types/blank_rune_2.tres" id="3_43deq"]
+[ext_resource type="PackedScene" uid="uid://d164mj1wu1tmj" path="res://Player/rp_player.tscn" id="3_ilnnd"]
+[ext_resource type="PackedScene" uid="uid://baw6jx7bvw1cc" path="res://RunePicking/HUD/stamina_bar.tscn" id="5_3lhmy"]
+
+[node name="RpLevelDisplay" type="Node"]
+script = ExtResource("1_l001y")
+rune_map = Array[Array]([[ExtResource("2_hpchi"), Vector2(100, 100)], [ExtResource("3_43deq"), Vector2(500, 500)], [ExtResource("2_hpchi"), Vector2(1000, 500)]])
+
+[node name="LevelPhysicsPlane" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Player" parent="LevelPhysicsPlane" instance=ExtResource("3_ilnnd")]
+z_index = 1
+z_as_relative = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="StaminaBar" parent="CanvasLayer" instance=ExtResource("5_3lhmy")]
+z_as_relative = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -273.5
+offset_right = 273.5
+offset_bottom = 69.0
+grow_vertical = 1
+metadata/_edit_use_anchors_ = true

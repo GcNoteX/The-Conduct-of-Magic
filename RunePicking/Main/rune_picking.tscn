@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://cckokj5ng7qv7"]
+
+[ext_resource type="Script" path="res://RunePicking/Main/rp_artifact_management.gd" id="1_d567i"]
+[ext_resource type="PackedScene" uid="uid://cmu55wa7rg65d" path="res://RunePicking/Main/rp_commission_list.tscn" id="1_ewpkt"]
+[ext_resource type="Script" path="res://CommissionPapers/commissions.gd" id="2_3plqe"]
+[ext_resource type="Resource" uid="uid://byddgojmeg7wo" path="res://CommissionPapers/test_com3.tres" id="3_a5elq"]
+[ext_resource type="Resource" uid="uid://c37j3l7qey5rd" path="res://CommissionPapers/test_com2.tres" id="4_krj2k"]
+[ext_resource type="PackedScene" uid="uid://d4cokkpqjlna8" path="res://RunePicking/Main/rp_lab.tscn" id="4_kylpi"]
+[ext_resource type="Resource" uid="uid://ddyxl7s820qer" path="res://CommissionPapers/test_com1.tres" id="5_kpsn2"]
+[ext_resource type="PackedScene" uid="uid://q00ea1q364xo" path="res://RunePicking/Main/rp_actions_display.tscn" id="7_qfvi3"]
+
+[node name="RunePicking" type="Node"]
+script = ExtResource("1_d567i")
+commission_list = Array[ExtResource("2_3plqe")]([ExtResource("5_kpsn2"), ExtResource("4_krj2k"), ExtResource("3_a5elq")])
+
+[node name="Bottom UI" type="Control" parent="."]
+layout_mode = 3
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Ensure scale well" type="ColorRect" parent="Bottom UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxOfUI" type="HBoxContainer" parent="Bottom UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="RpCommissionList" parent="Bottom UI/HBoxOfUI" instance=ExtResource("1_ewpkt")]
+layout_mode = 2
+commission_list = Array[ExtResource("2_3plqe")]([null])
+
+[node name="RpCommissionList2" parent="Bottom UI/HBoxOfUI" instance=ExtResource("1_ewpkt")]
+layout_mode = 2
+commission_list = Array[ExtResource("2_3plqe")]([ExtResource("3_a5elq"), ExtResource("4_krj2k"), ExtResource("5_kpsn2"), ExtResource("5_kpsn2")])
+
+[node name="RpActionsDisplay" parent="Bottom UI/HBoxOfUI" instance=ExtResource("7_qfvi3")]
+layout_mode = 2
+
+[node name="TestRemoveButton" type="Button" parent="Bottom UI"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Test remove artifact button"
+
+[node name="Lab" parent="." instance=ExtResource("4_kylpi")]
+
+[node name="TestRpDisplayGeneration" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="pressed" from="Bottom UI/TestRemoveButton" to="." method="_on_test_remove_button_pressed"]
+[connection signal="timeout" from="TestRpDisplayGeneration" to="." method="_on_test_rp_display_generation_timeout"]

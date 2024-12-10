@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://q00ea1q364xo"]
+
+[ext_resource type="Script" path="res://RunePicking/Main/rp_actions_display.gd" id="1_g0wby"]
+
+[node name="RpActionsDisplay" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_g0wby")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.684732, 0.684732, 0.684732, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="ActionsList" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StartRunePickingButton" type="Button" parent="MarginContainer/ActionsList"]
+layout_mode = 2
+text = "Start Rune Picking"
+
+[node name="EndSessionButton" type="Button" parent="MarginContainer/ActionsList"]
+layout_mode = 2
+text = "End Lab Session"
+
+[connection signal="pressed" from="MarginContainer/ActionsList/StartRunePickingButton" to="." method="_on_start_rune_picking_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ActionsList/EndSessionButton" to="." method="_on_end_session_button_pressed"]

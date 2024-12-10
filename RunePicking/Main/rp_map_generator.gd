@@ -2,22 +2,19 @@ class_name RunePickingMapGenerator
 extends Node
 
 # Exports and preloading items
-@export var artifact_data: Artifact
+@export var artifact_data: ArtifactData
 @onready var rune: PackedScene = preload("res://RunePicking/Runes/general_rune.tscn")
 
 # Scenes variables and constants
 const rune_picking_border: int = 100
 var runes: Array[Rune] = []
 
-func _ready() -> void:
-	pass
-
-func intiailize(artifact_data: Artifact) -> void:
+func intiailize(artifact_data: ArtifactData) -> void:
 	# Generate placements for runes
 	for i in range(artifact_data.max_number_of_runes): # TODO: Should I make the number of runes random?
 		# Get a random rune from possible runes for the artifact
-		var random_index = randi_range(0, artifact_data.runes.size() - 1)
-		var random_rune = artifact_data.runes[random_index]
+		var random_index = randi_range(0, artifact_data.rune_table.size() - 1)
+		var random_rune = artifact_data.rune_table[random_index]
 		
 		# Instantiate rune from resource # TODO: Difference instantiation if special runes 
 		var rune_instance = rune.instantiate() as Rune

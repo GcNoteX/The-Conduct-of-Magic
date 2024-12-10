@@ -51,10 +51,10 @@ func prepare_character_data(location):
 	var artifact_pool: Array = GameConstants.ArtifactPool[location]
 	var random_artifact =  artifact_pool[randi() % len(artifact_pool)]
 	var artifact_path = GameConstants.artifact_path + random_artifact 
-	var artifact: Artifact = load(artifact_path)
+	var artifact: ArtifactData = load(artifact_path)
 	commission = generate_commission(artifact)
 	
-func generate_commission(artifact: Artifact) -> CommissionData:
+func generate_commission(artifact: ArtifactData) -> CommissionData:
 	var commission: CommissionData = load("res://CommissionPapers/commissions.gd").new()
 	commission.prepare_commission_data(self, artifact)
 	return commission
