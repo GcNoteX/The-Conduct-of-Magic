@@ -47,5 +47,4 @@ layout_mode = 2
 unique_name_in_owner = true
 
 [node name="TransitionToNextDay" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true

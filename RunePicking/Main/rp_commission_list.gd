@@ -19,7 +19,6 @@ func _enter_tree() -> void:
 	call_deferred("refresh_commission_list")
 
 func initialize_commission_list(new_commission_list: Array[CommissionData]) -> void:
-	print("Commission list in the commission box, " , new_commission_list)
 	commission_list = new_commission_list
 	display_commission(0)
 

@@ -14,8 +14,8 @@ extends Resource
 
 func prepare_commission_data(customer: CustomerData, artifact_instance: ArtifactData):
 	artifact = artifact_instance
-	for rune in artifact_instance.rune_table:
-		speculative_runes = rune.rune_name + "," + speculative_runes
+	for rune_name in artifact_instance.rune_table:
+		speculative_runes = rune_name + "," + speculative_runes
 	artifact_description = "This is a placeholder description of the artifact"
 	artifact_origin = "This is a placeholder for the artifacts origin"
 	

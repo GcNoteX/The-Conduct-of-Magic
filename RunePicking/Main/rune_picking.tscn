@@ -11,6 +11,7 @@
 
 [node name="RunePicking" type="Node"]
 script = ExtResource("1_d567i")
+commission_list = Array[ExtResource("2_3plqe")]([ExtResource("5_kpsn2"), ExtResource("4_krj2k"), ExtResource("3_a5elq")])
 
 [node name="Bottom UI" type="Control" parent="."]
 layout_mode = 3
@@ -39,11 +40,9 @@ theme_override_constants/separation = 0
 
 [node name="RpCommissionList" parent="Bottom UI/HBoxOfUI" instance=ExtResource("1_ewpkt")]
 layout_mode = 2
-commission_list = Array[ExtResource("2_3plqe")]([null])
 
 [node name="RpCommissionList2" parent="Bottom UI/HBoxOfUI" instance=ExtResource("1_ewpkt")]
 layout_mode = 2
-commission_list = Array[ExtResource("2_3plqe")]([ExtResource("3_a5elq"), ExtResource("4_krj2k"), ExtResource("5_kpsn2"), ExtResource("5_kpsn2")])
 
 [node name="RpActionsDisplay" parent="Bottom UI/HBoxOfUI" instance=ExtResource("7_qfvi3")]
 layout_mode = 2

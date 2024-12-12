@@ -12,3 +12,9 @@ func _on_start_rune_picking_button_pressed() -> void:
 
 func _on_end_session_button_pressed() -> void:
 	emit_signal("end_session")
+
+func disable_start_rune_picking_button() -> void:
+	start_rp_button.disabled = true
+
+func enable_start_rune_picking_button() -> void:
+	start_rp_button.disabled = false

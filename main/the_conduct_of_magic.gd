@@ -8,9 +8,10 @@ extends Node
 @onready var RunePickingLab: RPArtifactManager = $RunePicking
 
 func _ready() -> void:
+	remove_child(RunePickingLab)
+	
 	_initialize_shop_and_lab_scene()
 	
-	remove_child(RunePickingLab)
 	
 
 func _initialize_shop_and_lab_scene() -> void:
@@ -20,14 +21,14 @@ func _initialize_shop_and_lab_scene() -> void:
 	CustomerServiceShop.customers_booklist = customers_booklist
 	CustomerServiceShop.commission_booklist = commission_booklist
 	RunePickingLab.initialize_commission_list(commission_booklist)
+	print("passing...")
 	
 func _swap_to_shop() -> void:
-	print("Swaapping to shop")
+	print("Swapping to shop")
 	remove_child(RunePickingLab)
 	add_child(CustomerServiceShop)
 	CustomerServiceShop.start_day()
 	
 func _swap_to_lab() -> void:
-	print("Swapping to lab, Commission List: " , commission_booklist , " VS ", RunePickingLab.commission_list, " VS ", RunePickingLab.combox2.commission_list)
 	remove_child(CustomerServiceShop)
 	add_child(RunePickingLab)
