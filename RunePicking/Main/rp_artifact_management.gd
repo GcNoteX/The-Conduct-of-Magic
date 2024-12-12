@@ -1,6 +1,8 @@
 class_name RPArtifactManager
 extends Node
 
+@export var commission_list: Array[CommissionData] = []
+
 @onready var level_display: PackedScene = preload("res://RunePicking/Main/rp_level_display.tscn")
 
 @onready var combox1: RpCommissionList = $"Bottom UI/HBoxOfUI/RpCommissionList"
@@ -8,17 +10,22 @@ extends Node
 @onready var actions_display: RpActionsDisplay = $"Bottom UI/HBoxOfUI/RpActionsDisplay"
 @onready var lab: RPLab = $Lab
 
-@export var commission_list: Array[CommissionData]
 var instantiated_level: Node
 
+signal ending_lab_session
+
 func _ready() -> void:
-	combox1.initialize_commission_list(commission_list)
-	combox2.initialize_commission_list(commission_list)
 	combox2.selected_commission_updated.connect(self._update_displays)
 	actions_display.start_rune_picking.connect(self.start_rune_picking)
 	actions_display.end_session.connect(self.end_lab_session)
-	_update_artifact_in_lab()
 
+func initialize_commission_list(new_commission_list: Array[CommissionData]) -> void:
+	print("Commission list in the commission box, " , new_commission_list)
+	commission_list = new_commission_list
+	combox1.initialize_commission_list(commission_list)
+	combox2.initialize_commission_list(commission_list)
+	_update_artifact_in_lab()
+	
 func start_rune_picking() -> void:
 	print("Start rune picking")
 	# Get the artifact data from the commission data
@@ -30,11 +37,9 @@ func start_rune_picking() -> void:
 	get_tree().current_scene.add_child.call_deferred(instantiated_level)
 	$TestRpDisplayGeneration.start()
 	
-	
-	
 func end_lab_session() -> void:
 	print("Ending lab session")
-	pass
+	emit_signal("ending_lab_session")
 
 # Function to update all display accept the commission list, updates everything based on the commission list selected commission
 func _update_displays() -> void:
@@ -68,7 +73,6 @@ func _get_commission() -> CommissionData:
 	
 func _on_test_remove_button_pressed() -> void:
 	_remove_commission()
-
 
 func _on_test_rp_display_generation_timeout() -> void:
 	instantiated_level.queue_free()

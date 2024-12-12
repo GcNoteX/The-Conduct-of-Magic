@@ -10,3 +10,4 @@ name = "FIRE"
 sprite = ExtResource("3_pwhqf")
 max_number_of_runes = 5
 rune_table = Array[ExtResource("1_yoob7")]([])
+rune_map = Array[Array]([])

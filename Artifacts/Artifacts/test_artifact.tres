@@ -12,4 +12,4 @@ name = "Large Sword"
 sprite = ExtResource("4_vk5ns")
 max_number_of_runes = 5
 rune_table = Array[ExtResource("1_r6hw0")]([])
-rune_map = [[ExtResource("1_xj2x6"), Vector2(100, 100)], [ExtResource("2_pkwpo"), Vector2(500, 500)], [ExtResource("1_xj2x6"), Vector2(1000, 500)]]
+rune_map = Array[Array]([[ExtResource("1_xj2x6"), Vector2(100, 100)], [ExtResource("2_pkwpo"), Vector2(500, 500)], [ExtResource("1_xj2x6"), Vector2(1000, 500)]])

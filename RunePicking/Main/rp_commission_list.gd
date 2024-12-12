@@ -10,12 +10,16 @@ extends PanelContainer
 @onready var back_button: Button = $MarginContainer1/LeftButton
 @onready var next_button: Button = $MarginContainer2/RightButton
 
-@export var commission_list: Array[CommissionData]
+@export var commission_list: Array[CommissionData] = []
 var commission_number: int = 0
 
 signal selected_commission_updated
 
+func _enter_tree() -> void:
+	call_deferred("refresh_commission_list")
+
 func initialize_commission_list(new_commission_list: Array[CommissionData]) -> void:
+	print("Commission list in the commission box, " , new_commission_list)
 	commission_list = new_commission_list
 	display_commission(0)
 

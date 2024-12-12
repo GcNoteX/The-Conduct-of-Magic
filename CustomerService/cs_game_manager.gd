@@ -1,6 +1,11 @@
 class_name CustomerServiceGameManager
 extends Node
 
+
+@export var customers_booklist: Dictionary = {}  # The total customer to keep track of between days
+@export var commission_booklist: Array[CommissionData] = []
+@export var current_day: int = 1
+
 # This will be replaced with resourcce data for the day. or the modular generation of customers.
 @onready var customer: PackedScene = preload("res://Customers/customer.tscn") 
 
@@ -9,12 +14,11 @@ extends Node
 @onready var commission_dispay_UI: CommissionDisplay = $"Bottom UI/HBoxOfUI/CsCommissionDisplay"
 @onready var actions_UI: ActionsUI  = $"Bottom UI/HBoxOfUI/CsActionsChoice"
 
-var current_day: int = 1
-var customers_booklist: Dictionary  # The total customer to keep track of between days
 var customers_for_the_day: Array[Customer] = []
 var current_customer: Variant = null # This would either be a customer object or no one -> null, used to check whether the day can be properly ended as customer at the table should still be addressed.
 
 signal customer_has_been_processed
+signal ending_commission_session
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -90,16 +94,14 @@ func order_accepted() -> void:
 	current_customer.is_returning = true
 	current_customer.return_day = current_day + current_customer.patience
 	print("Order has been accepted! Customer returning: ", current_customer.return_day)
-	if !customers_booklist.has(current_customer.return_day):
-		customers_booklist[current_customer.return_day] = []
-	customers_booklist[current_customer.return_day].append(current_customer)
+	
+	_add_customer_to_booklist(current_customer)
+	_add_commission_to_booklist(current_customer.commission)
 	
 	# Make customer leave
 	customer_responded_to()
 	
 	# TODO: Save data
-	
-	
 	
 func order_rejected() -> void:
 	print("Order has been rejected")
@@ -134,9 +136,12 @@ func end_day() -> void:
 	print("Customer Service has ENDED!")
 	current_day += 1
 	print(customers_booklist)
+	
 	$TransitionToNextDay.start()
 	await $TransitionToNextDay.timeout
-	start_day()
+	print("Emitting signal")
+	emit_signal("ending_commission_session")
+	#start_day()
 	
 func customer_responded_to() -> void:
 	current_customer.leave_store()
@@ -144,3 +149,11 @@ func customer_responded_to() -> void:
 	customer_display_UI.clear_face()
 	commission_dispay_UI.clear_commission_display()
 	emit_signal("customer_has_been_processed")
+
+func _add_customer_to_booklist(customer: Customer) -> void:
+	if !customers_booklist.has(current_customer.return_day):
+		customers_booklist[current_customer.return_day] = []
+	customers_booklist[current_customer.return_day].append(current_customer)
+
+func _add_commission_to_booklist(commission: CommissionData) -> void:
+	commission_booklist.append(commission)

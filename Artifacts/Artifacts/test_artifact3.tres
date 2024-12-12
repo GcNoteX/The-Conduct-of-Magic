@@ -10,3 +10,4 @@ name = "Mini Man"
 sprite = ExtResource("3_itkeg")
 max_number_of_runes = 5
 rune_table = Array[ExtResource("1_gev7c")]([])
+rune_map = Array[Array]([])
