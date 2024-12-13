@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ArtifactData" load_steps=3 format=3 uid="uid://bpfiawbvfrtrb"]
+[gd_resource type="Resource" script_class="ArtifactData" load_steps=4 format=3 uid="uid://bpfiawbvfrtrb"]
 
+[ext_resource type="Resource" uid="uid://chginwnxc0yre" path="res://RunePicking/Runes/rune_types/blank_rune_2.tres" id="2_6exe1"]
 [ext_resource type="Script" path="res://Artifacts/Artifacts/artifacts.gd" id="2_wlo1e"]
 [ext_resource type="Texture2D" uid="uid://b4xgowr6tumq" path="res://Assets/placeholder_customer_sprite.png" id="3_itkeg"]
 
@@ -8,5 +9,5 @@ script = ExtResource("2_wlo1e")
 name = "Mini Man"
 sprite = ExtResource("3_itkeg")
 max_number_of_runes = 5
-rune_table = []
-rune_map = Array[Array]([])
+rune_table = Array[String]([])
+rune_map = Array[Array]([[ExtResource("2_6exe1"), Vector2(500, 300)], [ExtResource("2_6exe1"), Vector2(650, 500)]])

@@ -11,7 +11,7 @@
 
 [node name="RunePicking" type="Node"]
 script = ExtResource("1_d567i")
-commission_list = Array[ExtResource("2_3plqe")]([ExtResource("5_kpsn2"), ExtResource("4_krj2k"), ExtResource("3_a5elq")])
+full_commission_list = Array[ExtResource("2_3plqe")]([ExtResource("5_kpsn2"), ExtResource("4_krj2k"), ExtResource("3_a5elq")])
 
 [node name="Bottom UI" type="Control" parent="."]
 layout_mode = 3
@@ -55,9 +55,4 @@ text = "Test remove artifact button"
 
 [node name="Lab" parent="." instance=ExtResource("4_kylpi")]
 
-[node name="TestRpDisplayGeneration" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-
 [connection signal="pressed" from="Bottom UI/TestRemoveButton" to="." method="_on_test_remove_button_pressed"]
-[connection signal="timeout" from="TestRpDisplayGeneration" to="." method="_on_test_rp_display_generation_timeout"]

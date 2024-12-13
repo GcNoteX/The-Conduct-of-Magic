@@ -12,6 +12,8 @@ extends Resource
 @export var commission_due_date: int
 @export var reward: float
 
+@export var is_completed: bool
+
 func prepare_commission_data(customer: CustomerData, artifact_instance: ArtifactData):
 	artifact = artifact_instance
 	for rune_name in artifact_instance.rune_table:

@@ -35,7 +35,7 @@ func _ready() -> void:
 # Game code
 func awaken_rune() -> void:
 	if is_activated == false:
-		print(rune_data.rune_name, " has been activated.")
+		#print(rune_data.rune_name, " has been activated.")
 		rune_sprite.play("Awakened")
 		activate_rune_sfx.play()
 		is_activated = true

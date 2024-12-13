@@ -18,6 +18,7 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 save_manager="*res://main/save_manager.gd"
+PlayerData="*res://main/player_data.gd"
 
 [gui]
 

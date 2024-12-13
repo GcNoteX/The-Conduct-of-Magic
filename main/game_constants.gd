@@ -1,5 +1,5 @@
 class_name GameConstants
-extends Node
+extends Resource
 
 enum Locations {
 	ParentsWorkshop, ## Starting game location

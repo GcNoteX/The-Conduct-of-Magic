@@ -11,8 +11,6 @@ func _ready() -> void:
 	remove_child(RunePickingLab)
 	
 	_initialize_shop_and_lab_scene()
-	
-	
 
 func _initialize_shop_and_lab_scene() -> void:
 	CustomerServiceShop.ending_commission_session.connect(self._swap_to_lab)
@@ -20,7 +18,6 @@ func _initialize_shop_and_lab_scene() -> void:
 	
 	CustomerServiceShop.customers_booklist = customers_booklist
 	CustomerServiceShop.commission_booklist = commission_booklist
-	RunePickingLab.initialize_commission_list(commission_booklist)
 	print("passing...")
 	
 func _swap_to_shop() -> void:
@@ -30,5 +27,6 @@ func _swap_to_shop() -> void:
 	CustomerServiceShop.start_day()
 	
 func _swap_to_lab() -> void:
+	RunePickingLab.initialize_commission_list(commission_booklist)
 	remove_child(CustomerServiceShop)
 	add_child(RunePickingLab)
