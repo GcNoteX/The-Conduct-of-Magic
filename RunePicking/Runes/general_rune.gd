@@ -47,11 +47,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 # I Could delete the area 2d to shut off the signal for abit more performance if it has no more use.
 
 
-#func _on_area_2d_mouse_entered() -> void:
-	##print("Entered rune detected by rune")
-	#emit_signal("mouse_entered_rune", self)
-#
-#
-#func _on_area_2d_mouse_exited() -> void:
-	##print("Exiting rune detected by rune")
-	#emit_signal("mouse_exited_rune", self)
+func _on_area_2d_mouse_entered() -> void:
+	#print("Entered rune detected by rune")
+	emit_signal("mouse_entered_rune", self)
+
+
+func _on_area_2d_mouse_exited() -> void:
+	#print("Exiting rune detected by rune")
+	emit_signal("mouse_exited_rune", self)

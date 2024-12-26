@@ -5,14 +5,16 @@ extends Node
 @export var commission_list: Array[CommissionData] = []
 
 @onready var level_display: PackedScene = preload("res://RunePicking/Main/rp_level_display.tscn")
-
+@onready var player_data: PlayerDataResource = PlayerData.player_data
 @onready var lab: RPLab = $Lab
 @onready var bottom_ui: Control = $"Bottom UI"
-@onready var combox1: RpCommissionList = $"Bottom UI/HBoxOfUI/RpCommissionList"
+@onready var info_box: RichTextLabel = $"Bottom UI/HBoxOfUI/PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/StaminaInfo2"
 @onready var combox2: RpCommissionList = $"Bottom UI/HBoxOfUI/RpCommissionList2"
 @onready var actions_display: RpActionsDisplay = $"Bottom UI/HBoxOfUI/RpActionsDisplay"
 
+
 var instantiated_level: RpLevelDisplay
+
 
 signal ending_lab_session
 
@@ -28,6 +30,8 @@ func _ready() -> void:
 	combox2.selected_commission_updated.connect(self._update_displays)
 	actions_display.start_rune_picking.connect(self.start_rune_picking)
 	actions_display.end_session.connect(self.end_lab_session)
+	
+	info_box.text = str(player_data.stamina)
 
 func initialize_commission_list(new_commission_list: Array[CommissionData]) -> void:
 	full_commission_list = new_commission_list
@@ -38,7 +42,6 @@ func initialize_commission_list(new_commission_list: Array[CommissionData]) -> v
 	print("Full Commission list, " , full_commission_list)
 	print("None completed Commission list, " , commission_list)
 
-	combox1.initialize_commission_list(commission_list)
 	combox2.initialize_commission_list(commission_list)
 	_update_displays()
 	
@@ -86,7 +89,6 @@ func _update_artifact_in_lab() -> void:
 func _remove_commission() -> void:
 	if len(commission_list) > 0:
 		commission_list.remove_at(combox2.get_commission_index())
-		combox1.refresh_commission_list()
 		combox2.refresh_commission_list()
 		_update_displays()
 	else:
@@ -101,7 +103,9 @@ func _get_commission() -> CommissionData:
 func _on_test_remove_button_pressed() -> void:
 	_remove_commission()
 
-func _rune_map_exited(is_completed: bool) -> void:
+func _rune_map_exited(is_completed: bool, new_stamina_value: float) -> void:
+	player_data.stamina = new_stamina_value
+	info_box.text = str(new_stamina_value)
 	if is_completed:
 		var commission = _get_commission()
 		commission.is_completed = true

@@ -11,3 +11,4 @@ artifact_description = "test dec3"
 artifact_origin = "test origin3"
 commission_due_date = 2
 reward = 5.0
+is_completed = false
