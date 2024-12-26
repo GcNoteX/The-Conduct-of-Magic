@@ -67,7 +67,7 @@ size_flags_horizontal = 3
 
 [node name="StaminaInfo2" type="RichTextLabel" parent="Bottom UI/HBoxOfUI/PanelContainer/MarginContainer/HBoxContainer/PanelContainer2"]
 layout_mode = 2
-text = "Stamina"
+text = "Stamina_value"
 scroll_active = false
 
 [node name="RpCommissionList2" parent="Bottom UI/HBoxOfUI" instance=ExtResource("1_ewpkt")]

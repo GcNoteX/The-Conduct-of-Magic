@@ -1,8 +1,7 @@
 class_name MainGameManager
 extends Node
 
-@export var customers_booklist: Dictionary = {} # The total customer to keep track of between days
-@export var commission_booklist: Array[CommissionData] = []
+@onready var player_data: PlayerDataResource = PlayerData.player_data
 
 @onready var CustomerServiceShop: CustomerServiceGameManager = $CustomerService
 @onready var RunePickingLab: RPArtifactManager = $RunePicking
@@ -16,8 +15,8 @@ func _initialize_shop_and_lab_scene() -> void:
 	CustomerServiceShop.ending_commission_session.connect(self._swap_to_lab)
 	RunePickingLab.ending_lab_session.connect(self._swap_to_shop)
 	
-	CustomerServiceShop.customers_booklist = customers_booklist
-	CustomerServiceShop.commission_booklist = commission_booklist
+	CustomerServiceShop.customers_booklist = player_data.customers_booklist
+	CustomerServiceShop.commission_booklist = player_data.commission_booklist
 	print("passing...")
 	
 func _swap_to_shop() -> void:
@@ -27,6 +26,6 @@ func _swap_to_shop() -> void:
 	CustomerServiceShop.start_day()
 	
 func _swap_to_lab() -> void:
-	RunePickingLab.initialize_commission_list(commission_booklist)
+	RunePickingLab.initialize_commission_list(player_data.commission_booklist)
 	remove_child(CustomerServiceShop)
 	add_child(RunePickingLab)

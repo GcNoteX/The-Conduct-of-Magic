@@ -111,7 +111,19 @@ func order_rejected() -> void:
 	# TODO: Save data
 
 func artifact_returned() -> void:
-	print("Artifact returned!")
+	var is_commission_returned = false
+	for commission in commission_booklist:
+		if commission == current_customer.commission and commission.is_completed == true:
+			print("Commission completed and returned")
+			_remove_commission_from_booklist(commission)
+			_remove_customer_from_booklist(current_customer)
+			is_commission_returned = true
+			break
+	if !is_commission_returned:
+		print("Commission has been failed!!!")
+		_remove_commission_from_booklist(current_customer.commission)
+		_remove_customer_from_booklist(current_customer)
+	
 	# Make customer leave
 	customer_responded_to()
 	
@@ -157,3 +169,25 @@ func _add_customer_to_booklist(customer: Customer) -> void:
 
 func _add_commission_to_booklist(commission: CommissionData) -> void:
 	commission_booklist.append(commission)
+
+func _remove_customer_from_booklist(customer_to_delete: Customer) -> void:
+	var list_for_the_day: Array = customers_booklist[current_day]
+	if list_for_the_day == null:
+		push_warning("Attempted to remove customer ", customer_to_delete, " from invalid day: ", current_day)
+	for index in range(len(list_for_the_day)):
+		if list_for_the_day[index] == customer_to_delete:
+			list_for_the_day.remove_at(index)
+			print("Customer deleted: ", customer_to_delete)
+			return
+	push_warning("Failed to remove commission: ", customer_to_delete)
+	return
+	
+func _remove_commission_from_booklist(commission_to_delete: CommissionData) -> void:
+	for index in range(len(commission_booklist)):
+		if commission_booklist[index] == commission_to_delete:
+			commission_booklist.remove_at(index)
+			print("Commission deleted: ", commission_to_delete)
+			return
+	push_warning("Failed to remove commission: ", commission_to_delete)
+	return
+			
