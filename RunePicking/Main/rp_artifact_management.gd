@@ -35,18 +35,17 @@ func _ready() -> void:
 
 func initialize_commission_list(new_commission_list: Array[CommissionData]) -> void:
 	full_commission_list = new_commission_list
+	commission_list = []
 	for commission in full_commission_list:
 		if !commission.is_completed:
 			commission_list.append(commission) 
-			
-	print("Full Commission list, " , full_commission_list)
-	print("None completed Commission list, " , commission_list)
+	#print("Full Commission list, " , full_commission_list)
+	#print("None completed Commission list, " , commission_list)
 
 	combox2.initialize_commission_list(commission_list)
 	_update_displays()
 	
 func start_rune_picking() -> void:
-	print("Start rune picking")
 	# Get the artifact data from the commission data
 	var artifact = _get_commission().artifact
 	# Export the map from it and make a scene of it to do

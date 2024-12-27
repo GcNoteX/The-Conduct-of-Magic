@@ -40,6 +40,10 @@ func prepare_character_data(location):
 	spawn_location = location
 	
 	# TODO: Inserting dialogue
+	var all_dialogue = load_json_file("res://Customers/customer_dialogue/ParentsWorkshop.json")
+	var random_int = randi_range(1, 3)
+	var dialogue_set = "dialogue_set" + str(random_int)
+	dialogue = all_dialogue["ParentsWorkshop"][dialogue_set]
 	
 	# TODO: personality biased based on location
 	richness = round(randf_range(0, 3) * 10)/10
@@ -58,3 +62,15 @@ func generate_commission(artifact: ArtifactData) -> CommissionData:
 	var commission: CommissionData = load("res://CommissionPapers/commissions.gd").new()
 	commission.prepare_commission_data(self, artifact)
 	return commission
+
+func load_json_file(file_path: String):
+	if FileAccess.file_exists(file_path):
+		var data_file: FileAccess = FileAccess.open(file_path, FileAccess.READ)
+		var parsed_result = JSON.parse_string(data_file.get_as_text())
+		
+		if parsed_result is Dictionary:
+			return parsed_result
+		else:
+			print("Error reading file")
+	else:
+		print("File does not exist!")

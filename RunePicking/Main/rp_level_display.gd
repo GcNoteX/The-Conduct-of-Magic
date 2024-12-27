@@ -50,7 +50,6 @@ func _process(delta: float) -> void:
 		query.position = mouse_position
 		query.collide_with_areas = true
 		var answer = space_state.intersect_point(query)
-		print(answer)
 		if len(answer) == 1 and answer[0]['collider'].is_in_group('rune'):
 			print("It is rune!")
 			enable_play()

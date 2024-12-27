@@ -19,6 +19,7 @@ config/icon="res://Assets/icon.svg"
 
 save_manager="*res://main/save_manager.gd"
 PlayerData="*res://main/player_data.gd"
+DialogueManager="*res://main/DialogueManager.gd"
 
 [gui]
 

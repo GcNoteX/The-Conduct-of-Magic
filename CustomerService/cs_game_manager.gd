@@ -7,12 +7,14 @@ extends Node
 @export var current_day: int = 1
 
 # This will be replaced with resourcce data for the day. or the modular generation of customers.
+@onready var player_points: int = PlayerData.player_data.coins
 @onready var customer: PackedScene = preload("res://Customers/customer.tscn") 
 
 @onready var shop: ShopManager = %Shop
 @onready var customer_display_UI: CustomerDisplay = $"Bottom UI/HBoxOfUI/CsCustomerDisplay"
 @onready var commission_dispay_UI: CommissionDisplay = $"Bottom UI/HBoxOfUI/CsCommissionDisplay"
 @onready var actions_UI: ActionsUI  = $"Bottom UI/HBoxOfUI/CsActionsChoice"
+@onready var points_UI: RichTextLabel = $Control/PanelContainer/RichTextLabel
 
 var customers_for_the_day: Array[Customer] = []
 var current_customer: Variant = null # This would either be a customer object or no one -> null, used to check whether the day can be properly ended as customer at the table should still be addressed.
@@ -36,6 +38,7 @@ func _ready() -> void:
 func start_day() -> void:
 	actions_UI.end_day_button.disabled = false
 	print("The current day is: ", current_day)
+	_update_points_ui() # Update to most recent amount
 	# Reset the customers for the day
 	customers_for_the_day = []
 	
@@ -75,8 +78,9 @@ func create_customer(location) -> Customer:
 # Things to do when the customer sends their order
 func process_customer(customer: Customer) -> void:
 	current_customer = customer
-	# Display customer in left widget
+	# Display customer in left widget and start dialog
 	customer_display_UI.update_face(current_customer.face_sprite)
+	customer_display_UI.start_dialog(current_customer.dialogue["greetings"])
 	# Display commission/artifact submmission + actions UI elements 
 	if !customer.is_returning:
 		actions_UI.enable_request_actions()
@@ -117,13 +121,16 @@ func artifact_returned() -> void:
 			print("Commission completed and returned")
 			_remove_commission_from_booklist(commission)
 			_remove_customer_from_booklist(current_customer)
+			player_points += commission.reward
 			is_commission_returned = true
+			
 			break
 	if !is_commission_returned:
 		print("Commission has been failed!!!")
 		_remove_commission_from_booklist(current_customer.commission)
 		_remove_customer_from_booklist(current_customer)
 	
+	_update_points_ui()
 	# Make customer leave
 	customer_responded_to()
 	
@@ -145,13 +152,13 @@ func end_day() -> void:
 		await customer_has_been_processed
 	
 	# TODO: Closing sequence
-	print("Customer Service has ENDED!")
+	#print("Customer Service has ENDED!")
 	current_day += 1
 	print(customers_booklist)
 	
 	$TransitionToNextDay.start()
 	await $TransitionToNextDay.timeout
-	print("Emitting signal")
+	#print("Emitting signal")
 	emit_signal("ending_commission_session")
 	#start_day()
 	
@@ -190,4 +197,6 @@ func _remove_commission_from_booklist(commission_to_delete: CommissionData) -> v
 			return
 	push_warning("Failed to remove commission: ", commission_to_delete)
 	return
-			
+
+func _update_points_ui() -> void:
+	points_UI.text = str(player_points)

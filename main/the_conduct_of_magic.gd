@@ -17,15 +17,16 @@ func _initialize_shop_and_lab_scene() -> void:
 	
 	CustomerServiceShop.customers_booklist = player_data.customers_booklist
 	CustomerServiceShop.commission_booklist = player_data.commission_booklist
-	print("passing...")
+	#print("passing...")
 	
 func _swap_to_shop() -> void:
-	print("Swapping to shop")
+	#print("Swapping to shop")
 	remove_child(RunePickingLab)
 	add_child(CustomerServiceShop)
 	CustomerServiceShop.start_day()
 	
 func _swap_to_lab() -> void:
+	print("Swapping to lab: ", player_data.commission_booklist)
 	RunePickingLab.initialize_commission_list(player_data.commission_booklist)
 	remove_child(CustomerServiceShop)
 	add_child(RunePickingLab)
