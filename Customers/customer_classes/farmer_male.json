@@ -1,0 +1,110 @@
+{
+	"test_artifact": {
+		"face_and_body_sprites": [
+			["sample_face1(32x32).png", "sample_body1(32x32).png"],
+			["sample_face2(32x32).png", "sample_body2(32x32).png"],
+			["sample_face3(32x32).png", "sample_body3(32x32).png"],
+		],
+		"dialogue": {
+			"greetings": [
+				["Hello there! What a fine day to be here.", "I believe we have met before?"],
+				["Hey! I’ve heard great things about this workshop.", "I believe we have met before?"],
+				["Good morning! I hope you can help me with something.", "I am new here."]
+			],
+			"leaving": [
+				["Goodbye! I’ll be back soon."],
+				["See you later! Thanks for the help."],
+				["Farewell! I appreciate your time."]
+			],
+			"gratitude": [
+				["Thank you so much for your help!"],
+				["I really appreciate it, thank you!"],
+				["Much obliged! You’ve been very helpful."]
+			]
+		},
+		"commission": {
+			"artifact_origin": [
+				"artifact origin 1",
+				"artifact origin 2",
+				"artifact origin 3"
+			],
+			"artifact_description": [
+				"artifact description 1",
+				"artifact description 2",
+				"artifact description 3"
+			]
+		}
+	},
+	"test_artifact2": {
+		"face_and_body_sprites": [
+			["sample_face1(32x32).png", "sample_body1(32x32).png"],
+			["sample_face2(32x32).png", "sample_body2(32x32).png"],
+			["sample_face3(32x32).png", "sample_body3(32x32).png"],
+		],
+		"dialogue": {
+			"greetings": [
+				["Hello there! What a fine day to be here."],
+				["Hey! I’ve heard great things about this workshop."],
+				["Good morning! I hope you can help me with something."]
+			],
+			"leaving": [
+				["Goodbye! I’ll be back soon."],
+				["See you later! Thanks for the help."],
+				["Farewell! I appreciate your time."]
+			],
+			"gratitude": [
+				["Thank you so much for your help!"],
+				["I really appreciate it, thank you!"],
+				["Much obliged! You’ve been very helpful."]
+			]
+		},
+		"commission": {
+			"artifact_origin": [
+				"artifact origin 1",
+				"artifact origin 2",
+				"artifact origin 3"
+			],
+			"artifact_description": [
+				"artifact description 1",
+				"artifact description 2",
+				"artifact description 3"
+			]
+		}
+	},
+	"test_artifact3": {
+		"face_and_body_sprites": [
+			["sample_face1(32x32).png", "sample_body1(32x32).png"],
+			["sample_face2(32x32).png", "sample_body2(32x32).png"],
+			["sample_face3(32x32).png", "sample_body3(32x32).png"],
+		],
+		"dialogue": {
+			"greetings": [
+				["Hello there! What a fine day to be here."],
+				["Hey! I’ve heard great things about this workshop."],
+				["Good morning! I hope you can help me with something."]
+			],
+			"leaving": [
+				["Goodbye! I’ll be back soon."],
+				["See you later! Thanks for the help."],
+				["Farewell! I appreciate your time."]
+			],
+			"gratitude": [
+				["Thank you so much for your help!"],
+				["I really appreciate it, thank you!"],
+				["Much obliged! You’ve been very helpful."]
+			]
+		},
+		"commission": {
+			"artifact_origin": [
+				"artifact origin 1",
+				"artifact origin 2",
+				"artifact origin 3"
+			],
+			"artifact_description": [
+				"artifact description 1",
+				"artifact description 2",
+				"artifact description 3"
+			]
+		}
+	}
+}

@@ -7,19 +7,19 @@ var data = {}
 
 func save(content: Dictionary):
 	var file = FileAccess.open(path, FileAccess.WRITE)
-	file.store_string(json.stringify(content))
+	file.store_string(JSON.stringify(content))
 	file.close()
 	file = null
 
 func read_save():
 	var file = FileAccess.open(path, FileAccess.READ)
-	var content = json.parse_string(file.get_as_text())
+	var content = JSON.parse_string(file.get_as_text())
 	return content
 
 func create_new_save_file():
 	var file = FileAccess.open("res://Customers/customer_dialogue/ParentsWorkshop.json", FileAccess.READ)
 	if file:
-		var content = json.parse_string(file.get_as_text())
+		var content = JSON.parse_string(file.get_as_text())
 		data = content
 		save(content)
 	else:

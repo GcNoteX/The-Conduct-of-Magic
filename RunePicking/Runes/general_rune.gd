@@ -13,9 +13,6 @@ extends Node2D
 
 # Signals
 signal rune_activated(rune: Rune)
-## Signals for starting the game
-#signal mouse_entered_rune(rune: Rune)
-#signal mouse_exited_rune(rune: Rune)
 
 # Editor code
 func _ready() -> void:
@@ -41,17 +38,7 @@ func awaken_rune() -> void:
 		is_activated = true
 		emit_signal("rune_activated", self)
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_area_2d_body_entered(_body: Node2D) -> void:
 	awaken_rune()
 
 # I Could delete the area 2d to shut off the signal for abit more performance if it has no more use.
-
-
-func _on_area_2d_mouse_entered() -> void:
-	#print("Entered rune detected by rune")
-	emit_signal("mouse_entered_rune", self)
-
-
-func _on_area_2d_mouse_exited() -> void:
-	#print("Exiting rune detected by rune")
-	emit_signal("mouse_exited_rune", self)

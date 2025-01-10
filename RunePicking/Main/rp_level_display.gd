@@ -31,9 +31,9 @@ func _ready() -> void:
 			total_number_of_runes += 1
 	
 	# Initialize the player with the correct stats	
-func _rune_activated(rune: Rune) -> void:
+func _rune_activated(rune_instance: Rune) -> void:
 	number_of_activated_runes += 1
-	staminar_bar.increase_stamina_bar(rune.rune_data.stamina_recovered)
+	staminar_bar.increase_stamina_bar(rune_instance.rune_data.stamina_recovered)
 	
 	if number_of_activated_runes == total_number_of_runes:
 		var new_stamina_value = staminar_bar.get_stamina_bar_value()
@@ -65,7 +65,7 @@ func _leave_level_display(is_rune_map_completed: bool, new_stamina_value: float)
 	$LeaveDisplayTimer.start()
 	await $LeaveDisplayTimer.timeout
 	# Close the game
-	emit_signal("exit_level_display", true, new_stamina_value)
+	emit_signal("exit_level_display", is_rune_map_completed, new_stamina_value)
 
 func enable_play() -> void:
 	playing = true

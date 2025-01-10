@@ -17,6 +17,7 @@ config/icon="res://Assets/icon.svg"
 
 [autoload]
 
+GameConstants="*res://main/game_constants.gd"
 save_manager="*res://main/save_manager.gd"
 PlayerData="*res://main/player_data.gd"
 DialogueManager="*res://main/DialogueManager.gd"

@@ -10,6 +10,7 @@ extends PanelContainer
 
 func update_commission_display(commission: CommissionData) -> void:
 	artifact_display.texture = commission.artifact.sprite
+	print(commission.speculative_runes)
 	runes_display.text = commission.speculative_runes
 	commission_description.text = commission.artifact_description
 	origin_description.text = commission.artifact_origin

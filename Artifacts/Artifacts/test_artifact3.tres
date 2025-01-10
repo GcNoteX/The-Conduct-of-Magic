@@ -6,8 +6,9 @@
 
 [resource]
 script = ExtResource("2_wlo1e")
-name = "Mini Man"
+name = "test_artifact3"
 sprite = ExtResource("3_itkeg")
+class_owners = Array[String](["farmer_male"])
 max_number_of_runes = 5
 rune_table = Array[String]([])
 rune_map = Array[Array]([[ExtResource("2_6exe1"), Vector2(500, 300)], [ExtResource("2_6exe1"), Vector2(650, 500)]])

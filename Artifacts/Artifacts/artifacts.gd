@@ -5,6 +5,9 @@ extends Resource
 @export var name: String
 @export var sprite: Texture2D
 
+@export_category("Possible Class of Owners")
+@export var class_owners: Array[String]
+
 @export_category("Artifact Runes")
 @export var max_number_of_runes: int
 @export var rune_table: Array[String] # Or the number of runes runs out first

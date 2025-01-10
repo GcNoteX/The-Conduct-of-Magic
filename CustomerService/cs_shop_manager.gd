@@ -23,16 +23,19 @@ func initialize(customers_for_shop: Array[Customer]) -> void:
 
 func _send_customer_to_shop(customer: Customer) -> void:
 	self.add_child.call_deferred(customer)
-	customer.enter_store()
 	customer.position = customer_spawn_position
+	#var x =1
+	customer.enter_store()
 	
-	print(customer.customer_id, " : ", customer.customer_name, ' | ', customer.commission.commission_due_date)
+	if !customer.is_special:
+		print(customer.customer_id, " : ", customer.customer_name)
+	
+		
 	customers_spawned += 1
 
 func _on_customer_spawn_interval_timeout() -> void:
 	# The function which puts the customers in the shop
 	if customers_spawned < customer_count and !day_ended:
-		#var next_customer = customers.pop_front()
 		_send_customer_to_shop(customers[customers_spawned])
 	else:
 		$CustomerSpawnInterval.stop()

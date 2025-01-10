@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cwpiu18xw5kht" path="res://CustomerService/Textbox/sample text box.png" id="2_axdum"]
 
 [node name="TextBox" type="MarginContainer"]
-offset_right = 156.0
-offset_bottom = 83.0
+offset_right = 225.0
+offset_bottom = 44.0
 script = ExtResource("1_8c4fs")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
@@ -24,9 +24,15 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="MarginContainer"]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_vertical = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
 vertical_alignment = 1
 
 [node name="LetterDisplayTimer" type="Timer" parent="."]

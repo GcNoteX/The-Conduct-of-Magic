@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CustomerClass" load_steps=2 format=3 uid="uid://bft4q5rqwcug7"]
+
+[ext_resource type="Script" path="res://Customers/customer_class.gd" id="1_rn775"]
+
+[resource]
+script = ExtResource("1_rn775")
+name_of_class = "farmer_male"
+possible_names = Array[String](["Farmer McGregor", "Old Man Jenkins", "Tom Tiller", "Jed Hayseed", "Hank Harvest", "Buck Barley", "Elias Cornwell", "Silas Plowman", "Amos Weatherby", "Clyde Tillman"])
+min_richness = 1.0
+max_richness = 2.0
+min_patience = 1
+max_patience = 3
+min_intelligence = 1
+max_intelligence = 3

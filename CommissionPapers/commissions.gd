@@ -5,7 +5,7 @@ extends Resource
 # specific customers directly
 
 @export var artifact: ArtifactData
-@export var speculative_runes: String = ""## The guesswork on what runes are in the artifact
+@export var speculative_runes: String = "" ## The guesswork on what runes are in the artifact
 @export_multiline var artifact_description: String
 @export_multiline var artifact_origin: String
 
@@ -14,12 +14,15 @@ extends Resource
 
 @export var is_completed: bool
 
-func prepare_commission_data(customer: CustomerData, artifact_instance: ArtifactData):
+func prepare_commission_data(customer: Customer, customer_class: CustomerClass, artifact_instance: ArtifactData):
 	artifact = artifact_instance
+	
 	for rune_name in artifact_instance.rune_table:
 		speculative_runes = rune_name + "," + speculative_runes
-	artifact_description = "This is a placeholder description of the artifact"
-	artifact_origin = "This is a placeholder for the artifacts origin"
+		
+	var commission_text: Dictionary = customer_class.get_class_commission_text_set(artifact_instance.name)
+	artifact_description = commission_text["artifact_description"]
+	artifact_origin = commission_text["artifact_origin"]
 	
 	commission_due_date = customer.patience
 	reward = 10 * customer.richness

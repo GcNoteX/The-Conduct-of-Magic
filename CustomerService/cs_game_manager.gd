@@ -7,7 +7,7 @@ extends Node
 @export var current_day: int = 1
 
 # This will be replaced with resourcce data for the day. or the modular generation of customers.
-@onready var player_points: int = PlayerData.player_data.coins
+@onready var player_points: float = PlayerData.player_data.coins
 @onready var customer: PackedScene = preload("res://Customers/customer.tscn") 
 
 @onready var shop: ShopManager = %Shop
@@ -33,7 +33,7 @@ func _ready() -> void:
 	actions_UI.failed_commission.connect(self.commission_failed)
 	actions_UI.ending_day.connect(self.end_day)
 	
-	start_day()
+	call_deferred("start_day")
 
 func start_day() -> void:
 	actions_UI.end_day_button.disabled = false
@@ -43,49 +43,61 @@ func start_day() -> void:
 	customers_for_the_day = []
 	
 	# Add in all the customers whose commission makes them come back this day
+	print("Customers booklist: ", customers_booklist)
 	if customers_booklist.has(current_day):
-		for customer in customers_booklist[current_day]:
-			customers_for_the_day.append(customer)
+		for customer_entity in customers_booklist[current_day]:
+			customers_for_the_day.append(customer_entity)
+			customer_entity.send_order.connect(self.process_customer)
 	else:
-		print("No customers are pickig up orders today!")
+		#print("No customers are pickig up orders today!")
+		pass
 	
 	# Generate new customers if needed
-	if len(customers_for_the_day) < 3:
+	if len(customers_for_the_day) < 5:
 
 		for i in range(5 - len(customers_for_the_day)):
 			# Make a customer object
 			var customer_instance = create_customer(GameConstants.Locations.ParentsWorkshop)
-			
+			# Connecting send order to porcess customer is done in creat customer
 			customers_for_the_day.append(customer_instance)
 			
 		# TODO: Insert in special customers
 			
 	# Placiing customers into the shop scene to be managed there on when and where to spawn
+	# This line essentially starts the day as the 'shop' outputs signals from customers that the 
+	# rest of the UI responds to.
 	shop.initialize(customers_for_the_day)
 	
 func create_customer(location) -> Customer:
 	# Make a customer object
-	var customer_instance = customer.instantiate() as Customer
-	customer_instance.send_order.connect(self.process_customer) 
+	#var customer_instance = customer.instantiate() as Customer
+	var customer_instance = Customer.create_customer(location)
+	customer_instance.send_order.connect(self.process_customer)
 	
 	# Make an instance of a customer data resource THIS PART IS ONLY NEEDED FOR NONE SPECIAL NPCs
-	var customer_resource: CustomerData = load("res://Customers/customer_data.gd").new()
-
-	customer_instance.fill_in_customer_data(customer_resource, GameConstants.Locations.ParentsWorkshop)
+	#var customer_resource: CustomerData = load("res://Customers/customer_data.gd").new()
+#
+	#customer_instance.fill_in_customer_data(customer_resource, location)
 	
 	return customer_instance
 
 # Things to do when the customer sends their order
-func process_customer(customer: Customer) -> void:
-	current_customer = customer
+func process_customer(target_customer: Customer) -> void:
+	current_customer = target_customer
+	
+	#if customer.is_special:
+		#current_customer.commission = current_customer.special_commission[0]
+		
 	# Display customer in left widget and start dialog
 	customer_display_UI.update_face(current_customer.face_sprite)
+	
 	customer_display_UI.start_dialog(current_customer.dialogue["greetings"])
+
 	# Display commission/artifact submmission + actions UI elements 
-	if !customer.is_returning:
+	if !current_customer.is_returning:
 		actions_UI.enable_request_actions()
 		commission_dispay_UI.update_commission_display(current_customer.commission)
-	elif customer.is_returning:
+	elif current_customer.is_returning:
 		actions_UI.enable_submission_actions()
 		commission_dispay_UI.update_commission_display(current_customer.commission)
 		commission_dispay_UI.time_display.text = "HERE TO COLLECT!" # Just to test that we can identify returning and not returning
@@ -144,9 +156,9 @@ func end_day() -> void:
 	
 	# Make all customers leave except the one you are talking to
 	shop.day_ended = true
-	for customer in customers_for_the_day.slice(0, shop.customers_spawned):
-		if customer != null and customer != current_customer:
-			customer.leave_store()
+	for customer_instance in customers_for_the_day.slice(0, shop.customers_spawned):
+		if customer_instance != null and customer_instance != current_customer:
+			customer_instance.leave_store()
 	
 	if current_customer != null:
 		await customer_has_been_processed
@@ -169,10 +181,10 @@ func customer_responded_to() -> void:
 	commission_dispay_UI.clear_commission_display()
 	emit_signal("customer_has_been_processed")
 
-func _add_customer_to_booklist(customer: Customer) -> void:
-	if !customers_booklist.has(current_customer.return_day):
-		customers_booklist[current_customer.return_day] = []
-	customers_booklist[current_customer.return_day].append(current_customer)
+func _add_customer_to_booklist(customer_instance: Customer) -> void:
+	if !customers_booklist.has(customer_instance.return_day):
+		customers_booklist[customer_instance.return_day] = []
+	customers_booklist[customer_instance.return_day].append(customer_instance)
 
 func _add_commission_to_booklist(commission: CommissionData) -> void:
 	commission_booklist.append(commission)

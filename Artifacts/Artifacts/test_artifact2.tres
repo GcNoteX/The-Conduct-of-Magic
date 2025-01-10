@@ -6,8 +6,9 @@
 
 [resource]
 script = ExtResource("2_aulp2")
-name = "FIRE"
+name = "test_artifact2"
 sprite = ExtResource("3_pwhqf")
+class_owners = Array[String](["farmer_male"])
 max_number_of_runes = 5
 rune_table = Array[String]([])
 rune_map = Array[Array]([[ExtResource("2_yepxg"), Vector2(500, 500)]])
