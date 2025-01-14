@@ -33,7 +33,12 @@ func _ready() -> void:
 	actions_UI.failed_commission.connect(self.commission_failed)
 	actions_UI.ending_day.connect(self.end_day)
 	
-	call_deferred("start_day")
+	_initialize_booklist_customers()
+	
+func _initialize_booklist_customers() -> void:
+	for day in customers_booklist:
+		for customer in customers_booklist[day]:
+			customer.send_order.connect(self.process_customer)
 
 func start_day() -> void:
 	actions_UI.end_day_button.disabled = false
@@ -47,7 +52,7 @@ func start_day() -> void:
 	if customers_booklist.has(current_day):
 		for customer_entity in customers_booklist[current_day]:
 			customers_for_the_day.append(customer_entity)
-			customer_entity.send_order.connect(self.process_customer)
+			#customer_entity.send_order.connect(self.process_customer)
 	else:
 		#print("No customers are pickig up orders today!")
 		pass
@@ -70,14 +75,8 @@ func start_day() -> void:
 	
 func create_customer(location) -> Customer:
 	# Make a customer object
-	#var customer_instance = customer.instantiate() as Customer
 	var customer_instance = Customer.create_customer(location)
 	customer_instance.send_order.connect(self.process_customer)
-	
-	# Make an instance of a customer data resource THIS PART IS ONLY NEEDED FOR NONE SPECIAL NPCs
-	#var customer_resource: CustomerData = load("res://Customers/customer_data.gd").new()
-#
-	#customer_instance.fill_in_customer_data(customer_resource, location)
 	
 	return customer_instance
 
@@ -170,10 +169,9 @@ func end_day() -> void:
 	
 	$TransitionToNextDay.start()
 	await $TransitionToNextDay.timeout
-	#print("Emitting signal")
-	emit_signal("ending_commission_session")
-	#start_day()
 	
+	emit_signal("ending_commission_session")
+
 func customer_responded_to() -> void:
 	current_customer.leave_store()
 	current_customer = null

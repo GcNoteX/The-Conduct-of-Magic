@@ -11,15 +11,15 @@ config_version=5
 [application]
 
 config/name="The Conduct of Magic"
-run/main_scene="res://RunePicking/Levels/rp_level_test2.tscn"
+run/main_scene="res://main/the_conduct_of_magic.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
 [autoload]
 
 GameConstants="*res://main/game_constants.gd"
-save_manager="*res://main/save_manager.gd"
-PlayerData="*res://main/player_data.gd"
+SaveManager="*res://main/save_manager.gd"
+PlayerData="*res://main/running_player_data.gd"
 DialogueManager="*res://main/DialogueManager.gd"
 
 [gui]

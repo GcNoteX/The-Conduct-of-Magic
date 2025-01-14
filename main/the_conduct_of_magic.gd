@@ -1,32 +1,42 @@
 class_name MainGameManager
 extends Node
 
-@onready var player_data: PlayerDataResource = PlayerData.player_data
+@export var player_data: PlayerDataResource
 
-@onready var CustomerServiceShop: CustomerServiceGameManager = $CustomerService
-@onready var RunePickingLab: RPArtifactManager = $RunePicking
+@onready var root: MainGameManager = $"."
+@onready var customer_service_shop: CustomerServiceGameManager = $CustomerService
+@onready var rune_picking_lab: RPArtifactManager = $RunePicking
+@onready var main_menu: MainMenu = $MainMenu
 
 func _ready() -> void:
-	remove_child(RunePickingLab)
+	remove_child(customer_service_shop)
+	remove_child(rune_picking_lab)
 	
+	_initialize_main_menu()
 	_initialize_shop_and_lab_scene()
 
 func _initialize_shop_and_lab_scene() -> void:
-	CustomerServiceShop.ending_commission_session.connect(self._swap_to_lab)
-	RunePickingLab.ending_lab_session.connect(self._swap_to_shop)
+	customer_service_shop.ending_commission_session.connect(self._swap_to_lab)
+	rune_picking_lab.ending_lab_session.connect(self._swap_to_shop)
 	
-	CustomerServiceShop.customers_booklist = player_data.customers_booklist
-	CustomerServiceShop.commission_booklist = player_data.commission_booklist
-	#print("passing...")
+	customer_service_shop.customers_booklist = player_data.customers_booklist
+	customer_service_shop.commission_booklist = player_data.commission_booklist
+
+func _initialize_main_menu() -> void:
+	main_menu.play_game.connect(self._swap_to_shop)
 	
 func _swap_to_shop() -> void:
-	#print("Swapping to shop")
-	remove_child(RunePickingLab)
-	add_child(CustomerServiceShop)
-	CustomerServiceShop.start_day()
+	_remove_current_child()
+	
+	add_child(customer_service_shop)
+	customer_service_shop.start_day()
 	
 func _swap_to_lab() -> void:
-	print("Swapping to lab: ", player_data.commission_booklist)
-	RunePickingLab.initialize_commission_list(player_data.commission_booklist)
-	remove_child(CustomerServiceShop)
-	add_child(RunePickingLab)
+	_remove_current_child()
+	
+	rune_picking_lab.initialize_commission_list(player_data.commission_booklist)
+	add_child(rune_picking_lab)
+
+func _remove_current_child() -> void:
+	for child in root.get_children():
+		remove_child(child)

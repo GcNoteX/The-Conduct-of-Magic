@@ -9,7 +9,7 @@ extends Node
 @onready var lab: RPLab = $Lab
 @onready var bottom_ui: Control = $"Bottom UI"
 @onready var info_box: RichTextLabel = $"Bottom UI/HBoxOfUI/PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/StaminaInfo2"
-@onready var combox2: RpCommissionList = $"Bottom UI/HBoxOfUI/RpCommissionList2"
+@onready var commission_list_box: RpCommissionList = $"Bottom UI/HBoxOfUI/RpCommissionList"
 @onready var actions_display: RpActionsDisplay = $"Bottom UI/HBoxOfUI/RpActionsDisplay"
 
 
@@ -27,7 +27,7 @@ func _enter_tree() -> void:
 		#call_deferred("_update_displays")
 
 func _ready() -> void:
-	combox2.selected_commission_updated.connect(self._update_displays)
+	commission_list_box.selected_commission_updated.connect(self._update_displays)
 	actions_display.start_rune_picking.connect(self.start_rune_picking)
 	actions_display.end_session.connect(self.end_lab_session)
 	
@@ -42,7 +42,7 @@ func initialize_commission_list(new_commission_list: Array[CommissionData]) -> v
 	#print("Full Commission list, " , full_commission_list)
 	#print("None completed Commission list, " , commission_list)
 
-	combox2.initialize_commission_list(commission_list)
+	commission_list_box.initialize_commission_list(commission_list)
 	_update_displays()
 	
 func start_rune_picking() -> void:
@@ -87,8 +87,8 @@ func _update_artifact_in_lab() -> void:
 
 func _remove_commission() -> void:
 	if len(commission_list) > 0:
-		commission_list.remove_at(combox2.get_commission_index())
-		combox2.refresh_commission_list()
+		commission_list.remove_at(commission_list_box.get_commission_index())
+		commission_list_box.refresh_commission_list()
 		_update_displays()
 	else:
 		push_warning("Attempting to remove from a commission list which has no commissions")
@@ -97,7 +97,7 @@ func _commission_list_is_empty() -> bool:
 	return len(commission_list) == 0
 
 func _get_commission() -> CommissionData:
-	return commission_list[combox2.get_commission_index()]
+	return commission_list[commission_list_box.get_commission_index()]
 	
 func _on_test_remove_button_pressed() -> void:
 	_remove_commission()

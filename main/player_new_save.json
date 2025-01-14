@@ -1,0 +1,18 @@
+{
+	"player_profile": {
+		"player_name": "Tom",
+		"player_sprite": "player_sprite 1",
+		"coins": "100",
+		"reputation": "0",
+		"mana": "100",
+		"location": "ParentsWorkshop",
+		"game_state": "workshop"
+	},
+	"customer_booklist":{
+		
+	},
+	"commission_booklist":{
+		
+	}
+	
+}

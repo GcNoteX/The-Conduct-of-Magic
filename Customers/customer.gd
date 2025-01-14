@@ -79,23 +79,29 @@ static func create_customer(location: int) -> Customer:
 
 	return customer_instance
 
+static func cast_data_to_customer_instance(data: Dictionary) -> Customer:
+	# Load the Customer scene
+	var packed_customer_scene = preload("res://Customers/customer.tscn")
+	var customer_instance = packed_customer_scene.instantiate() as Customer  # Cast to Customer
 	
+	customer_instance.customer_id = data["customer_id"]
+	customer_instance.customer_name = data["customer_name"]
+	customer_instance.customer_class = data["customer_class"]
+	customer_instance.face_sprite = data["face_sprite"]
+	customer_instance.body_sprite = data["body_sprite"]
+	customer_instance.spawn_location = int(data["spawn_location"])
+	customer_instance.dialogue = data["dialogue"]
+	customer_instance.commission = data["commission"] #TODO: This thing is suppose to be CommssionData, will need to load customers after commissions
+	
+	customer_instance.richness = int(data["richness"])
+	customer_instance.patience = int(data["patience"])
+	customer_instance.intelligence = int(data["intelligence"])
+	
+	# TODO: These two items may need to be moved once we integrated special customers
+	customer_instance.is_special = bool(int(data["is_special"])) # save is_special as 1 or 0
+	customer_instance.favorability = int(data["favorability"])
 
-#func fill_in_customer_data(data: CustomerData, location):
-	#if !data.is_special:
-		#data.prepare_character_data(location) # Fills in the customer resource with 'random' data
-		#commission = data.commission
-	#else:
-		#commission = data.special_commissions[0]
-	## The reason that we do not directly use the CustomerData is it makes it easier to store in JSON later
-	#customer_name = data.name
-	#face_sprite = data.face_sprite
-	#spawn_location = data.spawn_location
-	#richness = data.richness
-	#patience = data.patience
-	#intelligence = data.intelligence
-	#dialogue = data.dialogue # TODO: Maybe for general customer make a constant file of dialogue so no redundant saves of dialogue text
-	#is_special = data.is_special
+	return customer_instance
 
 func _process(_delta: float) -> void:
 	# Simply to control the movement direction of the customer
@@ -162,3 +168,9 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 func _assign_collision_layers_and_masks():
 	self.collision_layer = 1 << 3
 	detection_area.collision_mask = (1 << 1) | (1 << 3)
+
+func _to_string() -> String:
+	if is_special:
+		return "Special Customer - %s (ID: %d)" % [customer_name, get_instance_id()]
+	else:
+		return "Customer - %s (ID: %d)" % [customer_name, get_instance_id()]

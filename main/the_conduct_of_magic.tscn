@@ -1,12 +1,49 @@
-[gd_scene load_steps=4 format=3 uid="uid://xxiv1guyneou"]
+[gd_scene load_steps=8 format=3 uid="uid://xxiv1guyneou"]
 
 [ext_resource type="Script" path="res://main/the_conduct_of_magic.gd" id="1_hffku"]
+[ext_resource type="Script" path="res://CommissionPapers/commissions.gd" id="2_8cato"]
 [ext_resource type="PackedScene" uid="uid://cckokj5ng7qv7" path="res://RunePicking/Main/rune_picking.tscn" id="2_h3pxv"]
 [ext_resource type="PackedScene" uid="uid://ihf12qmq1lro" path="res://CustomerService/customer_service.tscn" id="3_lgvoa"]
+[ext_resource type="PackedScene" uid="uid://dv1dxc6kqtlar" path="res://main/menus/main_menu.tscn" id="5_1pcaj"]
+
+[sub_resource type="GDScript" id="GDScript_gcdaj"]
+script/source = "class_name PlayerDataResource
+extends Resource
+
+@export var coins: float
+@export var stamina: float
+@export var customers_booklist: Dictionary = {} # The total customer to keep track of between days
+@export var commission_booklist: Array[CommissionData] = []
+
+func fill_in_customer_booklist() -> void:
+	#print(\"Filling booklist\")
+	var customer: PackedScene = load(\"res://Customers/customer.tscn\")
+	# for customer in the save file
+	var customer_instance = customer.instantiate() as Customer
+	var customer_resource = load(\"res://Customers/customers_data/Sylas.tres\")
+	customer_instance.fill_in_customer_data(customer_resource, GameConstants.Locations.ParentsWorkshop)
+	customers_booklist[1] = [customer_instance]
+
+func display_player_data() -> void:
+	print(\"Customer Booklist: \")
+	print(customers_booklist)
+	print(\"Commission Booklist: \")
+	print(commission_booklist)
+"
+
+[sub_resource type="Resource" id="Resource_6u41x"]
+script = SubResource("GDScript_gcdaj")
+coins = 0.0
+stamina = 100.0
+customers_booklist = {}
+commission_booklist = Array[ExtResource("2_8cato")]([])
 
 [node name="TheConductOfMagic" type="Node"]
 script = ExtResource("1_hffku")
+player_data = SubResource("Resource_6u41x")
 
 [node name="RunePicking" parent="." instance=ExtResource("2_h3pxv")]
 
 [node name="CustomerService" parent="." instance=ExtResource("3_lgvoa")]
+
+[node name="MainMenu" parent="." instance=ExtResource("5_1pcaj")]

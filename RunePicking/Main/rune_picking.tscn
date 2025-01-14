@@ -70,7 +70,7 @@ layout_mode = 2
 text = "Stamina_value"
 scroll_active = false
 
-[node name="RpCommissionList2" parent="Bottom UI/HBoxOfUI" instance=ExtResource("1_ewpkt")]
+[node name="RpCommissionList" parent="Bottom UI/HBoxOfUI" instance=ExtResource("1_ewpkt")]
 layout_mode = 2
 
 [node name="RpActionsDisplay" parent="Bottom UI/HBoxOfUI" instance=ExtResource("7_qfvi3")]

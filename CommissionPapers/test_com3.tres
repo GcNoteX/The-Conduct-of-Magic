@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_opngr")
+commissioner = ""
 artifact = ExtResource("1_ho6nr")
 speculative_runes = ""
 artifact_description = "test dec3"

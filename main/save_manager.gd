@@ -14,10 +14,11 @@ func save(content: Dictionary):
 func read_save():
 	var file = FileAccess.open(path, FileAccess.READ)
 	var content = JSON.parse_string(file.get_as_text())
+	file.close()
 	return content
 
 func create_new_save_file():
-	var file = FileAccess.open("res://Customers/customer_dialogue/ParentsWorkshop.json", FileAccess.READ)
+	var file = FileAccess.open("res://main/player_new_save.json", FileAccess.READ)
 	if file:
 		var content = JSON.parse_string(file.get_as_text())
 		data = content
@@ -29,15 +30,10 @@ func check_if_save_exists() -> bool:
 	var file = FileAccess.open(path, FileAccess.READ)
 	if file:
 		file.close()  # Close the file if it exists
-		print("FILE EXISTS!")
 		return true    # File exists
 	else:
-		print("FILE DOES NOT EXISTS, MAKING NEW ONE")
 		return false   # File doesn't exist
 	
-func _ready() -> void:
-	if !check_if_save_exists():
-		create_new_save_file()
-	#print(read_save())
-	
-	
+#func _ready() -> void:
+	#if !check_if_save_exists():
+		#create_new_save_file()
