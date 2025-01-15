@@ -15,7 +15,7 @@ extends Node
 @export var game_state: String
 
 @export var customers_booklist: Dictionary
-@export var commission_booklist: Dictionary
+@export var commission_booklist: Array
 
 func _ready() -> void:
 	pass
@@ -32,14 +32,19 @@ func load_player_data() -> void:
 		location = player_save["player_profile"]["location"]
 		game_state = player_save["player_profile"]["game_state"]
 		
-		for commission in player_save["commission_booklist"]:
-			pass
-		
+		# The reason I do not use the return_day of the customer is because special customers
+		# Which have not been seen, do not have a return_day set yet, it would cause errors. 
 		for day in player_save["customer_booklist"].keys():
 			for customer_data in player_save["customer_booklist"][day]:
 				if !customers_booklist.has(day):
 					customers_booklist[day] = []
 				customers_booklist[day].append(Customer.cast_data_to_customer_instance(customer_data))
+		
+		for day in customers_booklist.keys():
+			for customer in customers_booklist[day]:
+				if customer.is_returning:
+					commission_booklist.append(customer.commission)
+		
 		
 	else:
 		push_error("Attempted to load player data when no such thing exist")
@@ -48,5 +53,5 @@ func save_player_data() -> void:
 	var data = cast_player_data_to_dict()
 	SaveManager.save(data)
 
-func cast_player_data_to_dict() -> Dictionary:
+func cast_player_data_to_dict():
 	pass

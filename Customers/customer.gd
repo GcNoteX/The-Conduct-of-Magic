@@ -28,7 +28,6 @@ var customer_id: int
 @export var is_special: bool = false
 @export_range(0, 5, 1) var favorability: int = 0
 
-var return_day: int
 var is_returning: bool = false
 # Conditions to check for the customer's state
 var waiting
@@ -91,7 +90,8 @@ static func cast_data_to_customer_instance(data: Dictionary) -> Customer:
 	customer_instance.body_sprite = data["body_sprite"]
 	customer_instance.spawn_location = int(data["spawn_location"])
 	customer_instance.dialogue = data["dialogue"]
-	customer_instance.commission = data["commission"] #TODO: This thing is suppose to be CommssionData, will need to load customers after commissions
+	
+	customer_instance.commission = CommissionData.cast_data_to_commission_instance(data["commission"]) #TODO: This thing is suppose to be CommssionData, will need to load customers after commissions
 	
 	customer_instance.richness = int(data["richness"])
 	customer_instance.patience = int(data["patience"])
@@ -100,6 +100,8 @@ static func cast_data_to_customer_instance(data: Dictionary) -> Customer:
 	# TODO: These two items may need to be moved once we integrated special customers
 	customer_instance.is_special = bool(int(data["is_special"])) # save is_special as 1 or 0
 	customer_instance.favorability = int(data["favorability"])
+	
+	customer_instance.is_returning = bool(int(data["is_returning"]))
 
 	return customer_instance
 

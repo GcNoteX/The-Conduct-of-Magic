@@ -1,7 +1,7 @@
 class_name MainGameManager
 extends Node
 
-@export var player_data: PlayerDataResource
+@onready var player_data = PlayerData
 
 @onready var root: MainGameManager = $"."
 @onready var customer_service_shop: CustomerServiceGameManager = $CustomerService

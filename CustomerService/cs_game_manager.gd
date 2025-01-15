@@ -107,16 +107,21 @@ func order_accepted() -> void:
 	# Save customer to return
 	
 	current_customer.is_returning = true
-	current_customer.return_day = current_day + current_customer.patience
-	print("Order has been accepted! Customer returning: ", current_customer.return_day)
+	var return_day = current_day + current_customer.patience
+	print("Order has been accepted! Customer returning: ", return_day)
 	
-	_add_customer_to_booklist(current_customer)
+	_add_customer_to_booklist(current_customer, return_day)
 	_add_commission_to_booklist(current_customer.commission)
 	
 	# Make customer leave
 	customer_responded_to()
 	
-	# TODO: Save data
+	# Note: Saving all customers accepted will only be done at the end of the day
+	# Why: Commission are added to the booklist from save through determining which
+	# customers have is_returning as 'true', if a player restarts a day after accepting
+	# customers, this would save them for the future days, but then reload the day with a new set
+	# of the same number of customers as before, essentially making too many customers returning for future
+	# days.
 	
 func order_rejected() -> void:
 	print("Order has been rejected")
@@ -162,10 +167,11 @@ func end_day() -> void:
 	if current_customer != null:
 		await customer_has_been_processed
 	
+	# TODO: Save booklists and player stats now.
+	
 	# TODO: Closing sequence
 	#print("Customer Service has ENDED!")
 	current_day += 1
-	print(customers_booklist)
 	
 	$TransitionToNextDay.start()
 	await $TransitionToNextDay.timeout
@@ -179,10 +185,10 @@ func customer_responded_to() -> void:
 	commission_dispay_UI.clear_commission_display()
 	emit_signal("customer_has_been_processed")
 
-func _add_customer_to_booklist(customer_instance: Customer) -> void:
-	if !customers_booklist.has(customer_instance.return_day):
-		customers_booklist[customer_instance.return_day] = []
-	customers_booklist[customer_instance.return_day].append(customer_instance)
+func _add_customer_to_booklist(customer_instance: Customer, return_day: int) -> void:
+	if !customers_booklist.has(return_day):
+		customers_booklist[return_day] = []
+	customers_booklist[return_day].append(customer_instance)
 
 func _add_commission_to_booklist(commission: CommissionData) -> void:
 	commission_booklist.append(commission)

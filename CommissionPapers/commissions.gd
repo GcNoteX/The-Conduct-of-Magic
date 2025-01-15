@@ -15,6 +15,25 @@ extends Resource
 
 @export var is_completed: bool
 
+static func cast_data_to_commission_instance(data: Dictionary) -> CommissionData:
+	var commission_data_instance = CommissionData.new()
+	
+	commission_data_instance.commissioner = data["commissioner"]
+	
+	commission_data_instance.artifact = ArtifactData.cast_data_to_artifact_instance(data["commissioner"])
+	
+	commission_data_instance.speculative_runes = data["speculative_runes"]
+	commission_data_instance.artifact_description = data["artifact_description"]
+	commission_data_instance.artifact_origin = data["artifact_origin"]
+	
+	commission_data_instance.commission_due_date = int(data["commission_due_date"])
+	commission_data_instance.reward = float(data["reward"])
+	
+	commission_data_instance.is_completed = bool(int(data["is_completed"]))
+	
+	return commission_data_instance
+
+
 func prepare_commission_data(customer: Customer, customer_class: CustomerClass, artifact_instance: ArtifactData):
 	commissioner = customer.customer_name
 	artifact = artifact_instance
@@ -28,6 +47,7 @@ func prepare_commission_data(customer: Customer, customer_class: CustomerClass, 
 	
 	commission_due_date = customer.patience
 	reward = 10 * customer.richness
+
 
 func _to_string() -> String:
 	return "Commission - %s|%s (ID: %d)" % [commissioner, artifact.name, get_instance_id()]

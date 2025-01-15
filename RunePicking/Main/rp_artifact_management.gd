@@ -5,7 +5,7 @@ extends Node
 @export var commission_list: Array[CommissionData] = []
 
 @onready var level_display: PackedScene = preload("res://RunePicking/Main/rp_level_display.tscn")
-@onready var player_data: PlayerDataResource = PlayerData.player_data
+@onready var player_data = PlayerData.player_data
 @onready var lab: RPLab = $Lab
 @onready var bottom_ui: Control = $"Bottom UI"
 @onready var info_box: RichTextLabel = $"Bottom UI/HBoxOfUI/PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/StaminaInfo2"
@@ -39,8 +39,6 @@ func initialize_commission_list(new_commission_list: Array[CommissionData]) -> v
 	for commission in full_commission_list:
 		if !commission.is_completed:
 			commission_list.append(commission) 
-	#print("Full Commission list, " , full_commission_list)
-	#print("None completed Commission list, " , commission_list)
 
 	commission_list_box.initialize_commission_list(commission_list)
 	_update_displays()
