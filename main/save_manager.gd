@@ -34,6 +34,5 @@ func check_if_save_exists() -> bool:
 	else:
 		return false   # File doesn't exist
 	
-#func _ready() -> void:
-	#if !check_if_save_exists():
-		#create_new_save_file()
+func save_rune_picking():
+	pass

@@ -20,20 +20,33 @@ static func cast_data_to_commission_instance(data: Dictionary) -> CommissionData
 	
 	commission_data_instance.commissioner = data["commissioner"]
 	
-	commission_data_instance.artifact = ArtifactData.cast_data_to_artifact_instance(data["commissioner"])
+	commission_data_instance.artifact = ArtifactData.cast_data_to_artifact_instance(data["artifact"])
 	
 	commission_data_instance.speculative_runes = data["speculative_runes"]
 	commission_data_instance.artifact_description = data["artifact_description"]
 	commission_data_instance.artifact_origin = data["artifact_origin"]
 	
 	commission_data_instance.commission_due_date = int(data["commission_due_date"])
-	commission_data_instance.reward = float(data["reward"])
+	commission_data_instance.reward = data["reward"]
 	
-	commission_data_instance.is_completed = bool(int(data["is_completed"]))
+	commission_data_instance.is_completed = data["is_completed"]
 	
 	return commission_data_instance
 
-
+static func cast_commission_data_to_dict(commission: CommissionData) -> Dictionary:
+	var content = {
+		"commissioner": commission.commissioner,
+		"artifact": ArtifactData.cast_artifact_data_to_dict(commission.artifact),  # Assuming you have a function to handle artifact data
+		"speculative_runes": commission.speculative_runes,
+		"artifact_description": commission.artifact_description,
+		"artifact_origin": commission.artifact_origin,
+		"commission_due_date": commission.commission_due_date,
+		"reward": commission.reward,
+		"is_completed": commission.is_completed
+	}
+	
+	return content
+	
 static func create_commission(customer: Customer, customer_class: CustomerClass, artifact_instance: ArtifactData) -> CommissionData:
 	var commission_instance = CommissionData.new()
 	

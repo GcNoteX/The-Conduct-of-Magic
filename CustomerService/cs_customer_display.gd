@@ -7,7 +7,7 @@ extends PanelContainer
 func update_face(face_sprite: AnimatedSprite2D) -> void:
 	#var full_path = GameConstants.customer_sprites_path + face_name
 	#var face = load(full_path)
-	print("Updating face")
+	#print("Updating face")
 	
 	
 	animated_customer_face = face_sprite

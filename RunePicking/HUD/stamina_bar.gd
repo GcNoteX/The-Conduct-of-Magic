@@ -5,7 +5,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	progress_bar.value = PlayerData.stamina
+	progress_bar.value = PlayerData.mana
 
 func update_stamina(new_value: float) -> void:
 	progress_bar.value = new_value

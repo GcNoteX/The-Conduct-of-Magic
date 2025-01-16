@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="ArtifactData" load_steps=4 format=3 uid="uid://c5mnltevycqjr"]
 
-[ext_resource type="Script" path="res://Artifacts/Artifacts/artifacts.gd" id="2_aulp2"]
+[ext_resource type="Script" path="res://Artifacts/artifacts.gd" id="2_aulp2"]
 [ext_resource type="Resource" uid="uid://chginwnxc0yre" path="res://RunePicking/Runes/rune_types/blank_rune_2.tres" id="2_yepxg"]
 [ext_resource type="Texture2D" uid="uid://d3cpciinsqcng" path="res://Assets/Flame idle.png" id="3_pwhqf"]
 
 [resource]
 script = ExtResource("2_aulp2")
 name = "test_artifact2"
-sprite_id = ""
+sprite_resource_path = "res://Assets/Flame idle.png"
 sprite = ExtResource("3_pwhqf")
 class_owners = Array[String](["farmer_male"])
 max_number_of_runes = 5
-rune_table = Array[String]([])
+rune_table = []
 rune_map = Array[Array]([[ExtResource("2_yepxg"), Vector2(500, 500)]])

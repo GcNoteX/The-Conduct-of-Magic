@@ -191,6 +191,7 @@ radius = 9.0
 [resource]
 script = ExtResource("2_k7f0u")
 rune_name = "Blank rune"
+rune_dir = "blank_rune"
 frames = SubResource("SpriteFrames_hwcsg")
 shape = SubResource("CircleShape2D_w5mpu")
 radius = 9

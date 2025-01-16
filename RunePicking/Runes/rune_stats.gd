@@ -2,6 +2,7 @@ class_name RuneStats
 extends Resource
 
 @export var rune_name: String
+@export var rune_dir: String
 @export var frames: SpriteFrames
 
 @export var shape: Shape2D

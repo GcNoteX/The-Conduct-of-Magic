@@ -88,24 +88,43 @@ static func cast_data_to_customer_instance(data: Dictionary) -> Customer:
 	customer_instance.customer_id = data["customer_id"]
 	customer_instance.customer_name = data["customer_name"]
 	customer_instance.customer_class = data["customer_class"]
-	customer_instance.face_sprite = data["face_sprite"]
-	customer_instance.body_sprite = data["body_sprite"]
-	customer_instance.spawn_location = int(data["spawn_location"])
+	customer_instance.customer_tscn_path = data["customer_tscn_path"]
+
+	customer_instance.spawn_location = data["spawn_location"]
 	customer_instance.dialogue = data["dialogue"]
 	
 	customer_instance.commission = CommissionData.cast_data_to_commission_instance(data["commission"]) #TODO: This thing is suppose to be CommssionData, will need to load customers after commissions
 	
-	customer_instance.richness = int(data["richness"])
-	customer_instance.patience = int(data["patience"])
-	customer_instance.intelligence = int(data["intelligence"])
+	customer_instance.richness = data["richness"]
+	customer_instance.patience = data["patience"]
+	customer_instance.intelligence = data["intelligence"]
 	
 	# TODO: These two items may need to be moved once we integrated special customers
-	customer_instance.is_special = bool(int(data["is_special"])) # save is_special as 1 or 0
-	customer_instance.favorability = int(data["favorability"])
+	customer_instance.is_special = data["is_special"] # save is_special as 1 or 0
+	customer_instance.favorability = data["favorability"]
 	
-	customer_instance.is_returning = bool(int(data["is_returning"]))
+	customer_instance.is_returning = data["is_returning"]
 
 	return customer_instance
+
+static func cast_customer_data_to_dict(customer: Customer) -> Dictionary:
+	var content = {
+		"customer_id": customer.customer_id,
+		"customer_name": customer.customer_name,
+		"customer_class": customer.customer_class,
+		"customer_tscn_path": customer.customer_tscn_path,
+		"spawn_location": customer.spawn_location, 
+		"dialogue": customer.dialogue,  # Assuming dialogue is a Dictionary
+		"richness": customer.richness,
+		"patience": customer.patience,
+		"intelligence": customer.intelligence,
+		"is_special": customer.is_special,
+		"favorability": customer.favorability,
+		"is_returning": customer.is_returning,
+		"commission": CommissionData.cast_commission_data_to_dict(customer.commission)
+	}
+	
+	return content
 
 func _process(_delta: float) -> void:
 	# Simply to control the movement direction of the customer

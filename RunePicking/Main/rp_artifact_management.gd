@@ -31,7 +31,7 @@ func _ready() -> void:
 	actions_display.start_rune_picking.connect(self.start_rune_picking)
 	actions_display.end_session.connect(self.end_lab_session)
 	
-	info_box.text = str(player_data.stamina)
+	info_box.text = str(player_data.mana)
 
 func initialize_commission_list(new_commission_list: Array[CommissionData]) -> void:
 	full_commission_list = new_commission_list
@@ -101,13 +101,15 @@ func _on_test_remove_button_pressed() -> void:
 	_remove_commission()
 
 func _rune_map_exited(is_completed: bool, new_stamina_value: float) -> void:
-	player_data.stamina = new_stamina_value
+	player_data.mana = new_stamina_value
+	
 	info_box.text = str(new_stamina_value)
 	if is_completed:
 		var commission = _get_commission()
 		commission.is_completed = true
 		_refresh_available_commissions()
 		
+	PlayerData.save_player_data()
 	instantiated_level.queue_free()
 	
 	bottom_ui.visible = true

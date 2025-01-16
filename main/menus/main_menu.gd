@@ -15,8 +15,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _on_play_button_pressed() -> void:
-	print("play")
-	print(SaveManager.read_save())
+
 	emit_signal("play_game")
 	pass # Replace with function body.
 

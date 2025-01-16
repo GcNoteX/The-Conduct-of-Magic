@@ -27,8 +27,8 @@ func _send_customer_to_shop(customer: Customer) -> void:
 	#var x =1
 	customer.enter_store()
 	
-	if !customer.is_special:
-		print(customer.customer_id, " : ", customer.customer_name)
+	#if !customer.is_special:
+		#print(customer.customer_id, " : ", customer.customer_name)
 	
 		
 	customers_spawned += 1

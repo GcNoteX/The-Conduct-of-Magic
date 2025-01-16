@@ -1,20 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqgnjiq4u557p"]
+[gd_scene load_steps=6 format=3 uid="uid://dqgnjiq4u557p"]
 
 [ext_resource type="Script" path="res://Customers/customer.gd" id="1_uge4w"]
-[ext_resource type="Texture2D" uid="uid://b4xgowr6tumq" path="res://Assets/placeholder_customer_sprite.png" id="2_j2n26"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ka5do"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qlim7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_j2n26")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_horek"]
 size = Vector2(70, 111)

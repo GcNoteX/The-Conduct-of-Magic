@@ -1,9 +1,9 @@
 extends Node
 
-func _ready() -> void:
-	DialogueSets = _load_dialogue_sets("res://Customers/customer_dialogue/ParentsWorkshop.json")
-
-var DialogueSets
+#func _ready() -> void:
+	#DialogueSets = _load_dialogue_sets("res://Customers/customer_dialogue/ParentsWorkshop.json")
+#
+#var DialogueSets
 
 enum Locations {
 	ParentsWorkshop, ## Starting game location
@@ -17,20 +17,6 @@ enum Locations {
 	AncientDecrypter,
 	BlackMarket
 }
-
-#const GenericNames: Dictionary = {
-	#Locations.ParentsWorkshop : [ # ParentsWorkshop
-		#"Alice",
-		#"Bob",
-		#"Charlie",
-		#"Diana",
-		#"Edward",
-		#"Fiona",
-		#"George",
-		#"Hannah",
-		#"Isaac"
-	#]
-#}
 
 const customer_class_path  = "res://Customers/customer_classes/"
 
@@ -68,7 +54,7 @@ func _load_dialogue_sets(file_path: String):
 		else:
 			print("Error reading file")
 	else:
-		print("File does not exist!")
+		print("Dialogue set file does not exist!")
 
 func location_enum_to_string(location: int) -> String:
 	match location:
@@ -95,6 +81,12 @@ func location_enum_to_string(location: int) -> String:
 		_:
 			push_error("An Invalid location was attempted to be located")
 			return "Unknown Location"
+
+func bool_to_int(the_bool: bool) -> int:
+	if the_bool:
+		return 1
+	else:
+		return 0
 
 func get_random_artifact(location: int) -> ArtifactData:
 	var artifact_pool = ArtifactPool[location]

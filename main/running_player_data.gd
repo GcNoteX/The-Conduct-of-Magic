@@ -10,16 +10,17 @@ extends Node
 
 @export var coins: int
 @export var reputation: int
-@export var stamina: float
-@export var location: String
+@export var mana: float
+@export var location: int
 
+@export var day: int
 @export var game_state: String
 
 @export var customers_booklist: Dictionary = {}
 @export var commission_booklist: Array[CommissionData] = []
 
 func _ready() -> void:
-	pass
+	load_player_data()
 
 func load_player_data() -> void:
 	if SaveManager.check_if_save_exists():
@@ -27,9 +28,9 @@ func load_player_data() -> void:
 		
 		player_name = player_save["player_profile"]["player_name"]
 		player_sprite = player_save["player_profile"]["player_sprite"]
-		coins = int(player_save["player_profile"]["coins"])
-		reputation = int(player_save["player_profile"]["reputation"])
-		stamina = float(player_save["player_profile"]["stamina"])
+		coins = player_save["player_profile"]["coins"]
+		reputation = player_save["player_profile"]["reputation"]
+		mana = player_save["player_profile"]["mana"]
 		location = player_save["player_profile"]["location"]
 		game_state = player_save["player_profile"]["game_state"]
 		
@@ -51,8 +52,31 @@ func load_player_data() -> void:
 		push_error("Attempted to load player data when no such thing exist")
 	
 func save_player_data() -> void:
+	print("Saving player data!")
 	var data = cast_player_data_to_dict()
 	SaveManager.save(data)
 
-func cast_player_data_to_dict():
-	pass
+func cast_player_data_to_dict() -> Dictionary:
+	var temp_customer_booklist = {} 
+	var content = {
+	"player_profile": {
+		"player_name": player_name,
+		"player_sprite": player_sprite,
+		"coins": coins,  # Converting to string to match your desired JSON output
+		"reputation": reputation,  # Optional: keep as int if not strict on type
+		"mana": mana,  # Converting to string (adjust as needed)
+		"location": location,
+		"day": day,
+		"game_state": game_state
+	},
+	"customer_booklist": temp_customer_booklist,  # Assuming it's a dictionary
+	}
+	
+	for day in customers_booklist:
+		for customer in customers_booklist[day]:
+			var customer_as_dict_instance = Customer.cast_customer_data_to_dict(customer)
+			if !temp_customer_booklist.has(day):
+				temp_customer_booklist[day] = []
+			temp_customer_booklist[day].append(customer_as_dict_instance)
+	
+	return content

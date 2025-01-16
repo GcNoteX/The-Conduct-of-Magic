@@ -4,10 +4,8 @@ extends Node
 
 @export var customers_booklist: Dictionary = {}  # The total customer to keep track of between days
 @export var commission_booklist: Array = []
-@export var current_day: int = 1
 
 # This will be replaced with resourcce data for the day. or the modular generation of customers.
-@onready var player_points: float = PlayerData.coins
 @onready var customer: PackedScene = preload("res://Customers/customer.tscn") 
 
 @onready var shop: ShopManager = %Shop
@@ -41,16 +39,22 @@ func _initialize_booklist_customers() -> void:
 			customer.send_order.connect(self.process_customer)
 
 func start_day() -> void:
+	print("===============")
+	print("The day before is: ", PlayerData.day)
+	print("The coin amount before is: ", PlayerData.coins)
+	PlayerData.day += 1
 	actions_UI.end_day_button.disabled = false
-	print("The current day is: ", current_day)
 	_update_points_ui() # Update to most recent amount
+	print("The current day is: ", PlayerData.day)
+	print("The coin amount after is: ", PlayerData.coins)
+	print("===============")
 	# Reset the customers for the day
 	customers_for_the_day = []
 	
 	# Add in all the customers whose commission makes them come back this day
-	print("Customers booklist: ", customers_booklist)
-	if customers_booklist.has(current_day):
-		for customer_entity in customers_booklist[current_day]:
+	#print("Customers booklist: ", customers_booklist)
+	if customers_booklist.has(PlayerData.day):
+		for customer_entity in customers_booklist[PlayerData.day]:
 			customers_for_the_day.append(customer_entity)
 			#customer_entity.send_order.connect(self.process_customer)
 	else:
@@ -107,7 +111,7 @@ func order_accepted() -> void:
 	# Save customer to return
 	
 	current_customer.is_returning = true
-	var return_day = current_day + current_customer.patience
+	var return_day = PlayerData.day + current_customer.patience
 	print("Order has been accepted! Customer returning: ", return_day)
 	
 	_add_customer_to_booklist(current_customer, return_day)
@@ -137,7 +141,7 @@ func artifact_returned() -> void:
 			print("Commission completed and returned")
 			_remove_commission_from_booklist(commission)
 			_remove_customer_from_booklist(current_customer)
-			player_points += commission.reward
+			PlayerData.coins += commission.reward
 			is_commission_returned = true
 			
 			break
@@ -168,10 +172,10 @@ func end_day() -> void:
 		await customer_has_been_processed
 	
 	# TODO: Save booklists and player stats now.
-	
+	PlayerData.save_player_data()
 	# TODO: Closing sequence
 	#print("Customer Service has ENDED!")
-	current_day += 1
+	
 	
 	$TransitionToNextDay.start()
 	await $TransitionToNextDay.timeout
@@ -194,9 +198,9 @@ func _add_commission_to_booklist(commission: CommissionData) -> void:
 	commission_booklist.append(commission)
 
 func _remove_customer_from_booklist(customer_to_delete: Customer) -> void:
-	var list_for_the_day: Array = customers_booklist[current_day]
+	var list_for_the_day: Array = customers_booklist[PlayerData.day]
 	if list_for_the_day == null:
-		push_warning("Attempted to remove customer ", customer_to_delete, " from invalid day: ", current_day)
+		push_warning("Attempted to remove customer ", customer_to_delete, " from invalid day: ", PlayerData.day)
 	for index in range(len(list_for_the_day)):
 		if list_for_the_day[index] == customer_to_delete:
 			list_for_the_day.remove_at(index)
@@ -215,4 +219,6 @@ func _remove_commission_from_booklist(commission_to_delete: CommissionData) -> v
 	return
 
 func _update_points_ui() -> void:
-	points_UI.text = str(player_points)
+	
+	var text = "Day: %d | Points: %d" % [PlayerData.day, PlayerData.coins] 
+	points_UI.text = text
