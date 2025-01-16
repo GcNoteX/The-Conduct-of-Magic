@@ -9,9 +9,6 @@
 [node name="CustomerService" type="Node"]
 script = ExtResource("1_m6mex")
 
-[node name="Shop" parent="." instance=ExtResource("3_rp63m")]
-unique_name_in_owner = true
-
 [node name="Bottom UI" type="Control" parent="."]
 layout_mode = 3
 anchor_top = 0.5
@@ -46,7 +43,11 @@ layout_mode = 2
 [node name="CsActionsChoice" parent="Bottom UI/HBoxOfUI" instance=ExtResource("2_7pbrr")]
 layout_mode = 2
 
+[node name="Shop" parent="." instance=ExtResource("3_rp63m")]
+unique_name_in_owner = true
+
 [node name="Control" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0

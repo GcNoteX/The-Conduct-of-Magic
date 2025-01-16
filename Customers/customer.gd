@@ -6,8 +6,9 @@ var customer_id: int
 @export_category("General")
 @export var customer_name: String
 @export var customer_class: String
-@export var face_sprite: String
-@export var body_sprite: String
+
+@export var customer_tscn_path: String
+
 ## Which map the customer will be in
 @export var spawn_location: GameConstants.Locations 
 ## Customer dialogue
@@ -33,6 +34,8 @@ var is_returning: bool = false
 var waiting
 var leaving
 
+@onready var customer_face_animated_sprite: AnimatedSprite2D = $FaceAnimatedSprite2D
+@onready var customer_body_animated_sprite: AnimatedSprite2D = $BodyAnimatedSprite2D
 @onready var moving_reaction_time: Timer = $MovingReactionTime
 @onready var testing_leaving_timer: Timer = $Testing_LeaveAfterOrder
 @onready var detection_area: Area2D = $detection_area2
@@ -40,29 +43,31 @@ var leaving
 signal send_order(customer: Customer) #TODO: Resource for the orders
 
 static func create_customer(location: int) -> Customer:
-	# Load the Customer scene
-	var packed_customer_scene = preload("res://Customers/customer.tscn")
-	var customer_instance = packed_customer_scene.instantiate() as Customer  # Cast to Customer
-	
-	customer_instance.customer_id = randi() # Just for easier checking for unique characters with same sprite,
-	customer_instance.spawn_location = location
-	
 	# Select an Artifact (Will be later stored through a commission)
 	var artifact: ArtifactData = GameConstants.get_random_artifact(location)
+	var selected_customer_class = artifact.class_owners[randi() % len(artifact.class_owners)]
 	
 	# Determine	the customer's class from the artifact
-	customer_instance.customer_class = artifact.class_owners[randi() % len(artifact.class_owners)]
-	
-	var customers_class_data_path: String = GameConstants.customer_class_path + customer_instance.customer_class + ".tres"
+	var customers_class_data_path: String = GameConstants.customer_class_path + selected_customer_class + ".tres"
 	var customer_class_data: CustomerClass = load(customers_class_data_path)
+	
+	# Determine the sprite set used for that customer to instantiate the correct child Customer tscn
+	var sprite_set = customer_class_data.get_class_sprite_set(artifact.name)
+	var customer_tscn_path = GameConstants.customer_scenes_path + sprite_set + ".tscn"
+	
+	# Load the Customer scene
+	var packed_customer_scene = load(customer_tscn_path)
+	var customer_instance = packed_customer_scene.instantiate() as Customer  # Cast to Customer
 	
 	# Determine through class
 	var generic_names = customer_class_data.possible_names
 	customer_instance.customer_name = generic_names[randi() % len(generic_names)]
+	customer_instance.customer_id = randi() # Just for easier checking for unique characters with same sprite,
+	customer_instance.spawn_location = location
 	
-	var sprite_set = customer_class_data.get_class_sprite_set(artifact.name)
-	customer_instance.face_sprite = sprite_set[0]
-	customer_instance.body_sprite = sprite_set[1]
+	customer_instance.customer_class = selected_customer_class
+	customer_instance.customer_tscn_path = customer_tscn_path
+	
 	customer_instance.dialogue = customer_class_data.get_class_dialogue_set(artifact.name)
 	
 	# TODO: Modify based on the sprite_set
@@ -70,11 +75,8 @@ static func create_customer(location: int) -> Customer:
 	customer_instance.patience = randi_range(customer_class_data.min_patience, customer_class_data.max_patience)
 	customer_instance.intelligence = randi_range(customer_class_data.min_intelligence, customer_class_data.max_intelligence)
 	
-	# TODO: Commission
-	var new_commission: CommissionData = load("res://CommissionPapers/commissions.gd").new()
-	new_commission.prepare_commission_data(customer_instance, customer_class_data, artifact)
-	
-	customer_instance.commission = new_commission
+	# TODO: Commission	
+	customer_instance.commission = CommissionData.create_commission(customer_instance, customer_class_data, artifact)
 
 	return customer_instance
 

@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqgnjiq4u557p"]
+[gd_scene load_steps=7 format=3 uid="uid://dqgnjiq4u557p"]
 
 [ext_resource type="Script" path="res://Customers/customer.gd" id="1_uge4w"]
 [ext_resource type="Texture2D" uid="uid://b4xgowr6tumq" path="res://Assets/placeholder_customer_sprite.png" id="2_j2n26"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ka5do"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qlim7"]
 animations = [{
@@ -25,7 +27,11 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_uge4w")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="FaceAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_ka5do")
+
+[node name="BodyAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(3.75, 4)
 sprite_frames = SubResource("SpriteFrames_qlim7")

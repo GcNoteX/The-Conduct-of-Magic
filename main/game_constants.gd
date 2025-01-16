@@ -45,7 +45,7 @@ const ArtifactPool: Dictionary = {
 }
 
 const customer_sprites_path = "res://Customers/customer_sprites/"
-
+const customer_scenes_path = "res://Customers/customer_scenes/"
 # The strings give directories to the possible customer sprites, their dialogue and variance in stats
 
 const CustomerPool: Dictionary = {

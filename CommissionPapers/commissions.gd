@@ -34,20 +34,23 @@ static func cast_data_to_commission_instance(data: Dictionary) -> CommissionData
 	return commission_data_instance
 
 
-func prepare_commission_data(customer: Customer, customer_class: CustomerClass, artifact_instance: ArtifactData):
-	commissioner = customer.customer_name
-	artifact = artifact_instance
+static func create_commission(customer: Customer, customer_class: CustomerClass, artifact_instance: ArtifactData) -> CommissionData:
+	var commission_instance = CommissionData.new()
+	
+	commission_instance.commissioner = customer.customer_name
+	commission_instance.artifact = artifact_instance
 	
 	for rune_name in artifact_instance.rune_table:
-		speculative_runes = rune_name + "," + speculative_runes
+		commission_instance.speculative_runes = rune_name + "," + commission_instance.speculative_runes
 		
 	var commission_text: Dictionary = customer_class.get_class_commission_text_set(artifact_instance.name)
-	artifact_description = commission_text["artifact_description"]
-	artifact_origin = commission_text["artifact_origin"]
+	commission_instance.artifact_description = commission_text["artifact_description"]
+	commission_instance.artifact_origin = commission_text["artifact_origin"]
 	
-	commission_due_date = customer.patience
-	reward = 10 * customer.richness
+	commission_instance.commission_due_date = customer.patience
+	commission_instance.reward = 10 * customer.richness
 
+	return commission_instance
 
 func _to_string() -> String:
 	return "Commission - %s|%s (ID: %d)" % [commissioner, artifact.name, get_instance_id()]

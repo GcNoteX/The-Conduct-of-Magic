@@ -7,15 +7,16 @@ extends Node
 
 @export var player_name: String
 @export var player_sprite: String
+
 @export var coins: int
 @export var reputation: int
-@export var mana: float
+@export var stamina: float
 @export var location: String
 
 @export var game_state: String
 
-@export var customers_booklist: Dictionary
-@export var commission_booklist: Array
+@export var customers_booklist: Dictionary = {}
+@export var commission_booklist: Array[CommissionData] = []
 
 func _ready() -> void:
 	pass
@@ -28,7 +29,7 @@ func load_player_data() -> void:
 		player_sprite = player_save["player_profile"]["player_sprite"]
 		coins = int(player_save["player_profile"]["coins"])
 		reputation = int(player_save["player_profile"]["reputation"])
-		mana = float(player_save["player_profile"]["mana"])
+		stamina = float(player_save["player_profile"]["stamina"])
 		location = player_save["player_profile"]["location"]
 		game_state = player_save["player_profile"]["game_state"]
 		

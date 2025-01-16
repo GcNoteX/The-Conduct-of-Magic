@@ -3,11 +3,11 @@ extends Node
 
 
 @export var customers_booklist: Dictionary = {}  # The total customer to keep track of between days
-@export var commission_booklist: Array[CommissionData] = []
+@export var commission_booklist: Array = []
 @export var current_day: int = 1
 
 # This will be replaced with resourcce data for the day. or the modular generation of customers.
-@onready var player_points: float = PlayerData.player_data.coins
+@onready var player_points: float = PlayerData.coins
 @onready var customer: PackedScene = preload("res://Customers/customer.tscn") 
 
 @onready var shop: ShopManager = %Shop
@@ -88,7 +88,7 @@ func process_customer(target_customer: Customer) -> void:
 		#current_customer.commission = current_customer.special_commission[0]
 		
 	# Display customer in left widget and start dialog
-	customer_display_UI.update_face(current_customer.face_sprite)
+	customer_display_UI.update_face(current_customer.customer_face_animated_sprite)
 	
 	customer_display_UI.start_dialog(current_customer.dialogue["greetings"])
 

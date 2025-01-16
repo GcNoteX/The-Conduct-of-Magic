@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_wlo1e")
 name = "test_artifact3"
+sprite_id = ""
 sprite = ExtResource("3_itkeg")
 class_owners = Array[String](["farmer_male"])
 max_number_of_runes = 5

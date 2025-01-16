@@ -1,9 +1,9 @@
 {
 	"test_artifact": {
 		"face_and_body_sprites": [
-			["sample_face1(32x32).png", "sample_body1(32x32).png"],
-			["sample_face2(32x32).png", "sample_body2(32x32).png"],
-			["sample_face3(32x32).png", "sample_body3(32x32).png"],
+			"farmer_male1",
+			"farmer_male2",
+			"farmer_male3",
 		],
 		"dialogue": {
 			"greetings": [
@@ -37,9 +37,9 @@
 	},
 	"test_artifact2": {
 		"face_and_body_sprites": [
-			["sample_face1(32x32).png", "sample_body1(32x32).png"],
-			["sample_face2(32x32).png", "sample_body2(32x32).png"],
-			["sample_face3(32x32).png", "sample_body3(32x32).png"],
+			"farmer_male1",
+			"farmer_male2",
+			"farmer_male3",
 		],
 		"dialogue": {
 			"greetings": [
@@ -73,9 +73,9 @@
 	},
 	"test_artifact3": {
 		"face_and_body_sprites": [
-			["sample_face1(32x32).png", "sample_body1(32x32).png"],
-			["sample_face2(32x32).png", "sample_body2(32x32).png"],
-			["sample_face3(32x32).png", "sample_body3(32x32).png"],
+			"farmer_male1",
+			"farmer_male2",
+			"farmer_male3",
 		],
 		"dialogue": {
 			"greetings": [

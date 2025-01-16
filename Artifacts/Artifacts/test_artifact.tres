@@ -10,6 +10,7 @@ metadata/__load_path__ = "res://Artifacts/Large Sword Artifact/Large Sword.png"
 [resource]
 script = ExtResource("1_xana5")
 name = "test_artifact"
+sprite_id = ""
 sprite = SubResource("Resource_eg5yq")
 class_owners = Array[String](["farmer_male"])
 max_number_of_runes = 5

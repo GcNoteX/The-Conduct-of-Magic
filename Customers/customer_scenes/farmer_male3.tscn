@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://djg4mw6r4wlk2"]
+
+[ext_resource type="PackedScene" uid="uid://dqgnjiq4u557p" path="res://Customers/customer.tscn" id="1_hqbja"]
+[ext_resource type="Texture2D" uid="uid://ce7sjig8bpbau" path="res://Customers/customer_sprites/sample_face3(32x32).png" id="2_1s0ek"]
+[ext_resource type="Texture2D" uid="uid://b4xgowr6tumq" path="res://Assets/placeholder_customer_sprite.png" id="3_aafs3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jync3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1s0ek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_aafs3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Customer" instance=ExtResource("1_hqbja")]
+
+[node name="FaceAnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_jync3")

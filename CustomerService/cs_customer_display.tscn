@@ -1,11 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://dydgiyi05g1cs"]
+[gd_scene load_steps=4 format=3 uid="uid://dydgiyi05g1cs"]
 
 [ext_resource type="Script" path="res://CustomerService/cs_customer_display.gd" id="1_dk5au"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_huiko"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_15ynl"]
 
 [node name="CsCustomerDisplay" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -15,10 +21,20 @@ script = ExtResource("1_dk5au")
 layout_mode = 2
 color = Color(0.699536, 0.519189, 0.203593, 1)
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_huiko")
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="CustomerFace" type="TextureRect" parent="MarginContainer"]
+visible = false
 texture_filter = 1
 layout_mode = 2
+texture = SubResource("AnimatedTexture_15ynl")
 stretch_mode = 5
+
+[connection signal="resized" from="." to="." method="_on_resized"]

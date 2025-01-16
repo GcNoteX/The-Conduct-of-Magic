@@ -31,7 +31,8 @@ static func cast_data_to_artifact_instance(data: Dictionary) -> ArtifactData:
 	artifact_instance.rune_table = data["rune_table"]
 	
 	for rune_data_set in data["rune_map"]:
-		var rune_data = RuneStats.cast_data_to_rune_instance(rune_data_set["rune_stats"])
+		var full_rune_path = RuneStats.runes_path + rune_data_set["rune_name"] + ".tres"
+		var rune_data = load(full_rune_path)
 		
 		var rune_positons = rune_data_set["position"]
 		

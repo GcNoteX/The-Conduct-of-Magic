@@ -18,7 +18,7 @@ extends Resource
 
 
 func get_class_sprite_set(artifact: String):
-	var sprite_set: Array
+	var sprite_set: String
 	var all_sprites_and_dialogue: Dictionary = _get_sprites_and_dialogue()
 	
 	if !all_sprites_and_dialogue.has(artifact):
