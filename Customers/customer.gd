@@ -134,14 +134,15 @@ func _process(_delta: float) -> void:
 		move_right()
 	
 func move_right() -> void:
-	position.x = position.x + 4
+	position.x = position.x + 2
 
 func move_left() -> void:
-	position.x = position.x - 4
+	position.x = position.x - 2
 
 func determine_customer_action(body: Node2D) -> void:
 	# Actions depending on condition
 	if body is CS_Player:
+
 		emit_signal("send_order", self)
 		
 	elif body is Customer:
@@ -157,6 +158,11 @@ func enter_store() -> void:
 	
 	self.scale.x = 1
 	call_deferred("_assign_collision_layers_and_masks")
+	
+	call_deferred("_initialize_animation")
+
+func _initialize_animation() -> void:
+	customer_body_animated_sprite.play("walking")
 
 func leave_store() -> void:
 	if !leaving:
@@ -167,11 +173,12 @@ func leave_store() -> void:
 		self.scale.x = -1 # inverts the node
 
 		leaving = true
+		customer_body_animated_sprite.play("walking")
 
 func _on_detection_area_2_area_entered(area: Area2D) -> void:
 	# Stop customer from moving
 	waiting = true
-	
+	customer_body_animated_sprite.play("waiting")
 	determine_customer_action(area)
 
 func _on_detection_area_2_area_exited(area: Area2D) -> void:
@@ -180,6 +187,7 @@ func _on_detection_area_2_area_exited(area: Area2D) -> void:
 		moving_reaction_time.start()
 		await moving_reaction_time.timeout
 		waiting = false
+		customer_body_animated_sprite.play("walking")
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	if is_returning:

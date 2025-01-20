@@ -23,6 +23,7 @@ func _on_play_button_pressed() -> void:
 func _on_new_game_button_pressed() -> void:
 	print("New game")
 	SaveManager.create_new_save_file()
+	PlayerData.load_player_data()
 	update_play_button_state()
 	pass # Replace with function body.
 

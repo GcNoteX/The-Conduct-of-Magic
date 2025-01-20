@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://djg4mw6r4wlk2"]
+[gd_scene load_steps=12 format=3 uid="uid://djg4mw6r4wlk2"]
 
 [ext_resource type="PackedScene" uid="uid://dqgnjiq4u557p" path="res://Customers/customer.tscn" id="1_hqbja"]
 [ext_resource type="Texture2D" uid="uid://ce7sjig8bpbau" path="res://Customers/customer_sprites/sample_face3(32x32).png" id="2_1s0ek"]
 [ext_resource type="Texture2D" uid="uid://b4xgowr6tumq" path="res://Assets/placeholder_customer_sprite.png" id="3_aafs3"]
+[ext_resource type="Texture2D" uid="uid://dk13wtq6vt0d4" path="res://Customers/customer_sprites/placeholder_customer_sprite_animated2.png" id="4_inywo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jync3"]
 animations = [{
@@ -18,7 +19,58 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqyjl"]
+atlas = ExtResource("4_inywo")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02k4b"]
+atlas = ExtResource("4_inywo")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v70wl"]
+atlas = ExtResource("4_inywo")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6edc"]
+atlas = ExtResource("4_inywo")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5681w"]
+atlas = ExtResource("4_inywo")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_noswg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqyjl")
+}],
+"loop": true,
+"name": &"waiting",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02k4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v70wl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6edc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5681w")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
 [node name="Customer" instance=ExtResource("1_hqbja")]
 
-[node name="FaceAnimatedSprite2D" parent="." index="0"]
+[node name="FaceAnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_jync3")
+
+[node name="BodyAnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_noswg")

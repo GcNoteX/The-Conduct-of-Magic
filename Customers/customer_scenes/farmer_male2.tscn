@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxfxhropnmlo5"]
+[gd_scene load_steps=10 format=3 uid="uid://bxfxhropnmlo5"]
 
 [ext_resource type="PackedScene" uid="uid://dqgnjiq4u557p" path="res://Customers/customer.tscn" id="1_ouf4n"]
 [ext_resource type="Texture2D" uid="uid://cgpoyodwcepnk" path="res://Customers/customer_sprites/sample_face2(32x32).png" id="2_lbi8l"]
 [ext_resource type="Texture2D" uid="uid://fnaut078dai" path="res://Assets/icon.svg" id="3_lx6ey"]
+[ext_resource type="Texture2D" uid="uid://dk13wtq6vt0d4" path="res://Customers/customer_sprites/placeholder_customer_sprite_animated2.png" id="4_33q7m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fa0wv"]
 animations = [{
@@ -18,7 +19,44 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gha8a"]
+atlas = ExtResource("4_33q7m")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aoy6a"]
+atlas = ExtResource("4_33q7m")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dk7k8"]
+atlas = ExtResource("4_33q7m")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3w6km"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gha8a")
+}],
+"loop": true,
+"name": &"waiting",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aoy6a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dk7k8")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
 [node name="Customer" instance=ExtResource("1_ouf4n")]
 
-[node name="FaceAnimatedSprite2D" parent="." index="0"]
+[node name="FaceAnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_fa0wv")
+
+[node name="BodyAnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_3w6km")

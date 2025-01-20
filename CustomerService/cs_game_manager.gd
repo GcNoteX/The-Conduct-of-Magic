@@ -44,7 +44,7 @@ func start_day() -> void:
 	print("The coin amount before is: ", PlayerData.coins)
 	PlayerData.day += 1
 	actions_UI.end_day_button.disabled = false
-	_update_points_ui() # Update to most recent amount
+	call_deferred("_update_points_ui") # Update to most recent amount
 	print("The current day is: ", PlayerData.day)
 	print("The coin amount after is: ", PlayerData.coins)
 	print("===============")
@@ -149,8 +149,7 @@ func artifact_returned() -> void:
 		print("Commission has been failed!!!")
 		_remove_commission_from_booklist(current_customer.commission)
 		_remove_customer_from_booklist(current_customer)
-	
-	_update_points_ui()
+	call_deferred("_update_points_ui")
 	# Make customer leave
 	customer_responded_to()
 	

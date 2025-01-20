@@ -32,6 +32,7 @@ func load_player_data() -> void:
 		reputation = player_save["player_profile"]["reputation"]
 		mana = player_save["player_profile"]["mana"]
 		location = player_save["player_profile"]["location"]
+		day = player_save["player_profile"]["day"]
 		game_state = player_save["player_profile"]["game_state"]
 		
 		# The reason I do not use the return_day of the customer is because special customers

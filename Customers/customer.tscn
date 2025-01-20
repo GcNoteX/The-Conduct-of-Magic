@@ -2,12 +2,23 @@
 
 [ext_resource type="Script" path="res://Customers/customer.gd" id="1_uge4w"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ka5do"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qlim7"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_horek"]
 size = Vector2(70, 111)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ka5do"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rlei5"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"waiting",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q85ae"]
 size = Vector2(20, 132)
@@ -17,6 +28,10 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_uge4w")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_horek")
+
 [node name="FaceAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_ka5do")
@@ -24,11 +39,8 @@ sprite_frames = SubResource("SpriteFrames_ka5do")
 [node name="BodyAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(3.75, 4)
-sprite_frames = SubResource("SpriteFrames_qlim7")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7.5)
-shape = SubResource("RectangleShape2D_horek")
+sprite_frames = SubResource("SpriteFrames_rlei5")
+animation = &"waiting"
 
 [node name="detection_area2" type="Area2D" parent="."]
 collision_layer = 0
