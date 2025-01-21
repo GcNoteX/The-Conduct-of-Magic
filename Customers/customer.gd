@@ -134,10 +134,10 @@ func _process(_delta: float) -> void:
 		move_right()
 	
 func move_right() -> void:
-	position.x = position.x + 2
+	position.x = position.x + 4
 
 func move_left() -> void:
-	position.x = position.x - 2
+	position.x = position.x - 4
 
 func determine_customer_action(body: Node2D) -> void:
 	# Actions depending on condition

@@ -1,10 +1,5 @@
 extends Node
 
-#func _ready() -> void:
-	#DialogueSets = _load_dialogue_sets("res://Customers/customer_dialogue/ParentsWorkshop.json")
-#
-#var DialogueSets
-
 enum Locations {
 	ParentsWorkshop, ## Starting game location
 	PersonalShop,
@@ -19,8 +14,9 @@ enum Locations {
 }
 
 const customer_class_path  = "res://Customers/customer_classes/"
-
 const artifact_base_path = "res://Artifacts/Artifacts/"
+const customer_sprites_path = "res://Customers/customer_sprites/"
+const customer_scenes_path = "res://Customers/customer_scenes/"
 
 const ArtifactPool: Dictionary = {
 	Locations.ParentsWorkshop : [ # ParentsWorkshop
@@ -30,18 +26,12 @@ const ArtifactPool: Dictionary = {
 	]
 }
 
-const customer_sprites_path = "res://Customers/customer_sprites/"
-const customer_scenes_path = "res://Customers/customer_scenes/"
-# The strings give directories to the possible customer sprites, their dialogue and variance in stats
-
-const CustomerPool: Dictionary = {
-	Locations.ParentsWorkshop : [
-		["sample_face1(32x32).png", "sample_body1(32x32).png", "dialogue_set1"],
-		["sample_face2(32x32).png", "sample_body2(32x32).png", "dialogue_set2"],
-		["sample_face3(32x32).png", "sample_body3(32x32).png", "dialogue_set3"],
-		#["sample_face4(32x32).png", "sample_body4(32x32).png", "dialogue_set4"],
-		#["sample_face5(32x32).png", "sample_body5(32x32).png", "dialogue_set5"]
-	]
+const SpecialCustomerList: Dictionary = {
+	Locations.ParentsWorkshop : {
+		1 : [
+			"res://Customers/customer_scenes/sylas_brown.tscn"
+		]
+	}
 }
 
 func _load_dialogue_sets(file_path: String):
@@ -81,12 +71,6 @@ func location_enum_to_string(location: int) -> String:
 		_:
 			push_error("An Invalid location was attempted to be located")
 			return "Unknown Location"
-
-func bool_to_int(the_bool: bool) -> int:
-	if the_bool:
-		return 1
-	else:
-		return 0
 
 func get_random_artifact(location: int) -> ArtifactData:
 	var artifact_pool = ArtifactPool[location]

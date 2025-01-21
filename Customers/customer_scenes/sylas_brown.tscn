@@ -1,0 +1,93 @@
+[gd_scene load_steps=14 format=3 uid="uid://iicca8vefiej"]
+
+[ext_resource type="PackedScene" uid="uid://dqgnjiq4u557p" path="res://Customers/customer.tscn" id="1_4wqmd"]
+[ext_resource type="Resource" uid="uid://bwivabyo2c81g" path="res://CommissionPapers/test_special_com1.tres" id="2_xxvun"]
+[ext_resource type="Texture2D" uid="uid://by3eplc6t4rlc" path="res://Customers/customer_sprites/special_customer_face_sprite_sample1(32x32).png" id="3_qwifs"]
+[ext_resource type="Texture2D" uid="uid://dk13wtq6vt0d4" path="res://Customers/customer_sprites/placeholder_customer_sprite_animated2.png" id="4_38mof"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7cq5"]
+atlas = ExtResource("3_qwifs")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wy4k5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7cq5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ep8a"]
+atlas = ExtResource("4_38mof")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3r7c"]
+atlas = ExtResource("4_38mof")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8c1n"]
+atlas = ExtResource("4_38mof")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2cf8"]
+atlas = ExtResource("4_38mof")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gv0t"]
+atlas = ExtResource("4_38mof")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dv2mx"]
+atlas = ExtResource("4_38mof")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ekydk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ep8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3r7c")
+}],
+"loop": true,
+"name": &"waiting",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8c1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2cf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gv0t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dv2mx")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[node name="Customer" instance=ExtResource("1_4wqmd")]
+customer_name = "Sylas Brown"
+customer_class = "special"
+customer_tscn_path = "res://Customers/customer_scenes/sylas_brown.tscn"
+dialogue = {
+"greetings": ["Nice to meet you, I am a special man", "I have got a special artifact for you today"]
+}
+commission = ExtResource("2_xxvun")
+is_special = true
+favorability = 2
+
+[node name="FaceAnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_wy4k5")
+
+[node name="BodyAnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_ekydk")

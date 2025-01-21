@@ -5,10 +5,11 @@
 
 [resource]
 script = ExtResource("1_b6w3u")
+commissioner = "Sylas Brown"
 artifact = ExtResource("1_2yrgr")
-speculative_runes = "Generic stuff"
+speculative_runes = "Special stuff"
 artifact_description = "Special Commission Description"
 artifact_origin = "Special Commission Origin"
-commission_due_date = 3
+commission_due_date = 1
 reward = 50.0
 is_completed = false

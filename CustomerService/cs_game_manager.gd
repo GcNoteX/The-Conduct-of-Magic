@@ -39,40 +39,36 @@ func _initialize_booklist_customers() -> void:
 			customer.send_order.connect(self.process_customer)
 
 func start_day() -> void:
-	print("===============")
-	print("The day before is: ", PlayerData.day)
-	print("The coin amount before is: ", PlayerData.coins)
 	PlayerData.day += 1
 	actions_UI.end_day_button.disabled = false
 	call_deferred("_update_points_ui") # Update to most recent amount
-	print("The current day is: ", PlayerData.day)
-	print("The coin amount after is: ", PlayerData.coins)
-	print("===============")
 	# Reset the customers for the day
 	customers_for_the_day = []
 	
 	# Add in all the customers whose commission makes them come back this day
-	#print("Customers booklist: ", customers_booklist)
 	if customers_booklist.has(PlayerData.day):
 		for customer_entity in customers_booklist[PlayerData.day]:
 			customers_for_the_day.append(customer_entity)
 			#customer_entity.send_order.connect(self.process_customer)
-	else:
-		#print("No customers are pickig up orders today!")
-		pass
 	
-	# Generate new customers if needed
-	if len(customers_for_the_day) < 5:
+	# Insert in special customers for the day
+	if GameConstants.SpecialCustomerList[PlayerData.location].has(PlayerData.day):
+		if len(GameConstants.SpecialCustomerList[PlayerData.location][PlayerData.day]) > 0:
+			for special_customer in GameConstants.SpecialCustomerList[PlayerData.location][PlayerData.day]:
+				var special_customer_instance = load(special_customer).instantiate()
+				special_customer_instance.send_order.connect(self.process_customer)
+				customers_for_the_day.append(special_customer_instance)
 
+	# Generate new customers if needed
+	if len(customers_for_the_day) < 5: # The number of customers can be modified based on the days requirement in the GameConstants
 		for i in range(5 - len(customers_for_the_day)):
 			# Make a customer object
 			var customer_instance = create_customer(GameConstants.Locations.ParentsWorkshop)
 			# Connecting send order to porcess customer is done in creat customer
 			customers_for_the_day.append(customer_instance)
 			
-		# TODO: Insert in special customers
 			
-	# Placiing customers into the shop scene to be managed there on when and where to spawn
+	# Placing customers into the shop scene to be managed there on when and where to spawn
 	# This line essentially starts the day as the 'shop' outputs signals from customers that the 
 	# rest of the UI responds to.
 	shop.initialize(customers_for_the_day)
@@ -111,7 +107,7 @@ func order_accepted() -> void:
 	# Save customer to return
 	
 	current_customer.is_returning = true
-	var return_day = PlayerData.day + current_customer.patience
+	var return_day = PlayerData.day + current_customer.commission.commission_due_date
 	print("Order has been accepted! Customer returning: ", return_day)
 	
 	_add_customer_to_booklist(current_customer, return_day)
@@ -171,7 +167,7 @@ func end_day() -> void:
 		await customer_has_been_processed
 	
 	# TODO: Save booklists and player stats now.
-	PlayerData.save_player_data()
+	
 	# TODO: Closing sequence
 	#print("Customer Service has ENDED!")
 	

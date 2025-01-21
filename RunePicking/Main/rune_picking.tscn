@@ -1,17 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://cckokj5ng7qv7"]
+[gd_scene load_steps=5 format=3 uid="uid://cckokj5ng7qv7"]
 
 [ext_resource type="Script" path="res://RunePicking/Main/rp_artifact_management.gd" id="1_d567i"]
 [ext_resource type="PackedScene" uid="uid://cmu55wa7rg65d" path="res://RunePicking/Main/rp_commission_list.tscn" id="1_ewpkt"]
-[ext_resource type="Script" path="res://CommissionPapers/commissions.gd" id="2_3im3g"]
-[ext_resource type="Resource" uid="uid://byddgojmeg7wo" path="res://CommissionPapers/test_com3.tres" id="3_a5elq"]
-[ext_resource type="Resource" uid="uid://c37j3l7qey5rd" path="res://CommissionPapers/test_com2.tres" id="4_krj2k"]
 [ext_resource type="PackedScene" uid="uid://d4cokkpqjlna8" path="res://RunePicking/Main/rp_lab.tscn" id="4_kylpi"]
-[ext_resource type="Resource" uid="uid://ddyxl7s820qer" path="res://CommissionPapers/test_com1.tres" id="5_kpsn2"]
 [ext_resource type="PackedScene" uid="uid://q00ea1q364xo" path="res://RunePicking/Main/rp_actions_display.tscn" id="7_qfvi3"]
 
 [node name="RunePicking" type="Node"]
 script = ExtResource("1_d567i")
-full_commission_list = Array[ExtResource("2_3im3g")]([ExtResource("5_kpsn2"), ExtResource("4_krj2k"), ExtResource("3_a5elq")])
 
 [node name="Bottom UI" type="Control" parent="."]
 layout_mode = 3
