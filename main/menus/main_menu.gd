@@ -23,12 +23,13 @@ func _on_play_button_pressed() -> void:
 
 func _on_new_game_button_pressed() -> void:
 	print("New game")
+	
+	
 	SaveManager.create_new_save_file()
 	PlayerData.load_player_data()
+	
 	update_play_button_state()
-	emit_signal("instantiate_new_game")
-	pass # Replace with function body.
-
+	call_deferred("emit_signal", "instantiate_new_game")
 
 func _on_settings_button_pressed() -> void:
 	pass # Replace with function body.

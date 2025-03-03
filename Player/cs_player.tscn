@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://fnaut078dai" path="res://Assets/icon.svg" id="1_fvdet"]
 [ext_resource type="Script" path="res://Player/cs_player.gd" id="1_kfpqr"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipnuo"]
+size = Vector2(124, 124)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_f554d"]
 animations = [{
 "frames": [{
@@ -14,17 +17,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipnuo"]
-size = Vector2(124, 124)
-
 [node name="CsPlayer" type="Area2D"]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_kfpqr")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ipnuo")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.992157, 0.623529, 1, 1)
 sprite_frames = SubResource("SpriteFrames_f554d")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ipnuo")

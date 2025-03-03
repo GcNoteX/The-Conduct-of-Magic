@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cad1ewyqamv5o"]
+[gd_scene load_steps=4 format=3 uid="uid://cad1ewyqamv5o"]
 
 [ext_resource type="Script" path="res://RunePicking/Runes/general_rune.gd" id="1_adm0j"]
-[ext_resource type="Resource" uid="uid://chginwnxc0yre" path="res://RunePicking/Runes/rune_types/blank_rune_2.tres" id="2_wuvg5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w5mpu"]
+radius = 9.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lqwov"]
 animations = [{
@@ -16,17 +18,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_w5mpu"]
-radius = 9.0
-
 [node name="GeneralRune" type="Node2D"]
 script = ExtResource("1_adm0j")
-rune_data = ExtResource("2_wuvg5")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_lqwov")
-animation = &"Sealed"
 
 [node name="Area2D" type="Area2D" parent="." groups=["rune"]]
 collision_layer = 4
@@ -34,6 +27,11 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_w5mpu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_lqwov")
+animation = &"Sealed"
 
 [node name="activate_rune_sfx" type="AudioStreamPlayer2D" parent="."]
 

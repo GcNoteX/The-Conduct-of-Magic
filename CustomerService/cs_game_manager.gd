@@ -104,7 +104,6 @@ func process_customer(target_customer: Customer) -> void:
 		push_error("Boolean is_returning has a none truth value!")
 
 func order_accepted() -> void:
-	# Save customer to return
 	
 	current_customer.is_returning = true
 	var return_day = PlayerData.day + current_customer.commission.commission_due_date
@@ -127,8 +126,6 @@ func order_rejected() -> void:
 	print("Order has been rejected")
 	# Make customer leave
 	customer_responded_to()
-	
-	# TODO: Save data
 
 func artifact_returned() -> void:
 	var is_commission_returned = false

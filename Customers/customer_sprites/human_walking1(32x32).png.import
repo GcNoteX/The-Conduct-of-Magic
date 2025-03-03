@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qhmn3ng75d6p"
-path="res://.godot/imported/Yellow Spark Rotating (8x8).png-7ceec7bb260889d94f4237e621039ce0.ctex"
+uid="uid://4lj357fxxo32"
+path="res://.godot/imported/human_walking1(32x32).png-7df809b784791564d364a27788267e5e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://RunePicking/Runes/Yellow Spark/Yellow Spark Rotating (8x8).png"
-dest_files=["res://.godot/imported/Yellow Spark Rotating (8x8).png-7ceec7bb260889d94f4237e621039ce0.ctex"]
+source_file="res://Customers/customer_sprites/human_walking1(32x32).png"
+dest_files=["res://.godot/imported/human_walking1(32x32).png-7df809b784791564d364a27788267e5e.ctex"]
 
 [params]
 

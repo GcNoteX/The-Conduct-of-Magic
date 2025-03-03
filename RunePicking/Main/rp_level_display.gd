@@ -21,19 +21,28 @@ func _ready() -> void:
 	# Construct Map
 	# item[0] is the object's resource, item[1] is its Vector2 position on the level display
 	for item in rune_map:
-		if item[0] is RuneStats:
-			var rune_instance = rune.instantiate() as Rune
-			rune_instance.rune_data = item[0]
+		if item[0].contains("rune"):
+			var rune_instance = _generate_rune_as_appropriate_class(item[0])
 			rune_instance.position = item[1]
 			rune_instance.rune_activated.connect(_rune_activated)
 			
 			level_physics_plane.add_child.call_deferred(rune_instance)
 			total_number_of_runes += 1
+
+func _generate_rune_as_appropriate_class(rune_dir: String):
+	var full_path = GameConstants.rune_types_path + rune_dir + ".tscn"
+	var rune_tscn = load(full_path)
+	var rune_instance = rune_tscn.instantiate()
 	
-	# Initialize the player with the correct stats	
-func _rune_activated(rune_instance: Rune) -> void:
+	# TODO: This set will increase as we get more runes
+	if rune_dir == "basic_rune":
+		rune_instance = rune_instance as BasicRune
+
+	return rune_instance
+
+func _rune_activated(rune_instance: GeneralRune) -> void:
 	number_of_activated_runes += 1
-	staminar_bar.increase_stamina_bar(rune_instance.rune_data.stamina_recovered)
+	staminar_bar.increase_stamina_bar(rune_instance.stamina_recovered)
 	
 	if number_of_activated_runes == total_number_of_runes:
 		var new_stamina_value = staminar_bar.get_stamina_bar_value()

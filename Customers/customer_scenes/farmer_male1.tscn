@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bf1pni310q46n"]
+[gd_scene load_steps=12 format=3 uid="uid://bf1pni310q46n"]
 
 [ext_resource type="PackedScene" uid="uid://dqgnjiq4u557p" path="res://Customers/customer.tscn" id="1_b0blb"]
 [ext_resource type="Texture2D" uid="uid://cr1uwyu0mpey5" path="res://Customers/customer_sprites/sample_face1(32x32).png" id="2_f0qna"]
@@ -19,9 +19,17 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4vk2r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tf4i"]
 atlas = ExtResource("4_xdu61")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcfc8"]
+atlas = ExtResource("4_xdu61")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcsie"]
+atlas = ExtResource("4_xdu61")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eb1ni"]
 atlas = ExtResource("4_xdu61")
@@ -35,7 +43,13 @@ region = Rect2(0, 32, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4vk2r")
+"texture": SubResource("AtlasTexture_6tf4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcfc8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcsie")
 }],
 "loop": true,
 "name": &"waiting",

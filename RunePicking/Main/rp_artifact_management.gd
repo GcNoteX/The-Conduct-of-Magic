@@ -20,7 +20,7 @@ signal ending_lab_session
 
 func _enter_tree() -> void:
 	
-	if get_tree().current_scene == self:
+	if get_tree().current_scene == self: # When I want to run the scene by itself for testing
 		call_deferred("initialize_commission_list", full_commission_list)
 	else:
 		pass

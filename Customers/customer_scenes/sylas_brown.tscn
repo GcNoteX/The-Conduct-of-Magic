@@ -91,3 +91,5 @@ sprite_frames = SubResource("SpriteFrames_wy4k5")
 
 [node name="BodyAnimatedSprite2D" parent="." index="2"]
 sprite_frames = SubResource("SpriteFrames_ekydk")
+animation = &"walking"
+frame_progress = 0.956744

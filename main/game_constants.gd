@@ -17,6 +17,7 @@ const customer_class_path  = "res://Customers/customer_classes/"
 const artifact_base_path = "res://Artifacts/Artifacts/"
 const customer_sprites_path = "res://Customers/customer_sprites/"
 const customer_scenes_path = "res://Customers/customer_scenes/"
+const rune_types_path = "res://RunePicking/Runes/rune_types/"
 
 const ArtifactPool: Dictionary = {
 	Locations.ParentsWorkshop : [ # ParentsWorkshop
@@ -77,4 +78,9 @@ func get_random_artifact(location: int) -> ArtifactData:
 	var random_artifact =  artifact_pool[randi() % len(artifact_pool)]
 	var artifact_path = artifact_base_path + random_artifact 
 	var artifact: ArtifactData = load(artifact_path)
+	
+	# Generate a random rune map for that artifact
+	for node in artifact.rune_map:
+		node[0] = artifact.rune_table[randi() % len(artifact.rune_table)]
+	
 	return artifact

@@ -32,12 +32,11 @@ static func cast_data_to_artifact_instance(data: Dictionary) -> ArtifactData:
 	artifact_instance.rune_table = data["rune_table"]
 	
 	for rune_data_set in data["rune_map"]:
-		var full_rune_path = RuneStats.runes_path + rune_data_set["rune_dir"] + ".tres"
-		var rune_data = load(full_rune_path)
+		var rune_data = rune_data_set["rune_dir"]
 		
-		var rune_positons = rune_data_set["position"]
+		var rune_positions = rune_data_set["position"]
 		
-		var position = Vector2(rune_positons[0], rune_positons[1])
+		var position = Vector2(rune_positions[0], rune_positions[1])
 		
 		artifact_instance.rune_map.append([rune_data, position])
 	
@@ -56,10 +55,10 @@ static func cast_artifact_data_to_dict(artifact: ArtifactData) -> Dictionary:
 	return content
 
 static func cast_rune_map_to_array(rune_map: Array) -> Array:
-	var content = []	
+	var content = []
 	for rune_information in rune_map:
 		var dict_instance = {}
-		dict_instance["rune_dir"] = rune_information[0].rune_dir
+		dict_instance["rune_dir"] = rune_information[0] # Save directory of rune\
 		var position_info: Vector2 = rune_information[1]
 		dict_instance["position"] = [position_info.x, position_info.y]
 		

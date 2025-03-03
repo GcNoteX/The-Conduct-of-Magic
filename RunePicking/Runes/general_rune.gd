@@ -1,33 +1,37 @@
-#@tool
-class_name Rune
+class_name GeneralRune
 extends Node2D
 
-@export var rune_data: RuneStats
+# General Rune Data
+@export var rune_name: String # Name for UI reasons
+@export var rune_dir: String # Name for the tscn associated with the rune
+@export var stamina_recovered: float = 0
 
-# Initialize variables
+# Initialize variables used for rune picking
 @onready var is_activated: bool = false
-#@onready var rune: RuneStats = rune_data
+
+# Simplify references
 @onready var rune_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var rune_collision_body: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var activate_rune_sfx: AudioStreamPlayer2D = $activate_rune_sfx
 
 # Signals
-signal rune_activated(rune: Rune)
+signal rune_activated(rune: GeneralRune)
 
 # Editor code
 func _ready() -> void:
+	rune_sprite.play("Sealed")
 	# Initialization, may make different sets based on collision shape in the future.
-	if rune_data != null:
-		rune_sprite.sprite_frames = rune_data.frames
-		rune_sprite.modulate = rune_data.rune_modulate_color
-		rune_collision_body.shape = rune_data.shape
-		rune_collision_body.shape.radius = rune_data.radius
-		activate_rune_sfx.stream = rune_data.awakened_sfx
-		self.scale = Vector2(rune_data.scale, rune_data.scale)
-		rune_sprite.play("Sealed")
-	else:
-		print("rune_data failed to export for ", self)
-		self.queue_free()
+	#if rune_data != null:
+		#rune_sprite.sprite_frames = rune_data.frames
+		#rune_sprite.modulate = rune_data.rune_modulate_color
+		#rune_collision_body.shape = rune_data.shape
+		#rune_collision_body.shape.radius = rune_data.radius
+		#activate_rune_sfx.stream = rune_data.awakened_sfx
+		#self.scale = Vector2(rune_data.scale, rune_data.scale)
+		#rune_sprite.play("Sealed")
+	#else:
+		#print("rune_data failed to export for ", self)
+		#self.queue_free()
 
 # Game code
 func awaken_rune() -> void:

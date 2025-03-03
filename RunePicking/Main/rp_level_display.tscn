@@ -1,15 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnb37u7lbfh0d"]
+[gd_scene load_steps=4 format=3 uid="uid://bnb37u7lbfh0d"]
 
 [ext_resource type="Script" path="res://RunePicking/Main/rp_level_display.gd" id="1_l001y"]
-[ext_resource type="Resource" uid="uid://by5pn5f760ji0" path="res://RunePicking/Runes/rune_types/blank_rune.tres" id="2_hpchi"]
-[ext_resource type="Resource" uid="uid://chginwnxc0yre" path="res://RunePicking/Runes/rune_types/blank_rune_2.tres" id="3_43deq"]
 [ext_resource type="PackedScene" uid="uid://d164mj1wu1tmj" path="res://Player/rp_player.tscn" id="3_ilnnd"]
 [ext_resource type="PackedScene" uid="uid://baw6jx7bvw1cc" path="res://RunePicking/HUD/stamina_bar.tscn" id="5_3lhmy"]
-[ext_resource type="Texture2D" uid="uid://fnaut078dai" path="res://Assets/icon.svg" id="5_vdqwr"]
 
 [node name="RpLevelDisplay" type="Node"]
 script = ExtResource("1_l001y")
-rune_map = Array[Array]([[ExtResource("2_hpchi"), Vector2(100, 100)], [ExtResource("3_43deq"), Vector2(500, 500)], [ExtResource("2_hpchi"), Vector2(1000, 500)]])
 
 [node name="LevelPhysicsPlane" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -17,10 +13,6 @@ unique_name_in_owner = true
 [node name="Player" parent="LevelPhysicsPlane" instance=ExtResource("3_ilnnd")]
 z_index = 1
 z_as_relative = false
-
-[node name="Icon" type="Sprite2D" parent="LevelPhysicsPlane"]
-position = Vector2(456, 467)
-texture = ExtResource("5_vdqwr")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -1,7 +1,5 @@
-[gd_resource type="Resource" script_class="ArtifactData" load_steps=5 format=3 uid="uid://cm0qxl3epiqd7"]
+[gd_resource type="Resource" script_class="ArtifactData" load_steps=3 format=3 uid="uid://cm0qxl3epiqd7"]
 
-[ext_resource type="Resource" uid="uid://by5pn5f760ji0" path="res://RunePicking/Runes/rune_types/blank_rune.tres" id="1_xj2x6"]
-[ext_resource type="Resource" uid="uid://chginwnxc0yre" path="res://RunePicking/Runes/rune_types/blank_rune_2.tres" id="2_pkwpo"]
 [ext_resource type="Script" path="res://Artifacts/artifacts.gd" id="3_88dym"]
 [ext_resource type="Texture2D" uid="uid://fnaut078dai" path="res://Assets/icon.svg" id="4_3gpxr"]
 
@@ -12,5 +10,5 @@ sprite_resource_path = "res://Assets/icon.svg"
 sprite = ExtResource("4_3gpxr")
 class_owners = ["farmer_male"]
 max_number_of_runes = 5
-rune_table = ["blank_rune", "blank_rune", "blank_rune2"]
-rune_map = Array[Array]([[ExtResource("1_xj2x6"), Vector2(100, 100)], [ExtResource("2_pkwpo"), Vector2(500, 500)], [ExtResource("1_xj2x6"), Vector2(1000, 500)]])
+rune_table = ["basic_rune", "basic_rune", "basic_rune"]
+rune_map = Array[Array]([["", Vector2(100, 100)], ["", Vector2(500, 500)], ["", Vector2(1000, 500)]])

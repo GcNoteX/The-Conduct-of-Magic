@@ -54,5 +54,6 @@ func _remove_current_child() -> void:
 		remove_child(child)
 
 func _reinstantiate_booklist() -> void:
+	print("Reinstantiating boolist")
 	customer_service_shop.customers_booklist = PlayerData.customers_booklist
 	customer_service_shop.commission_booklist = PlayerData.commission_booklist

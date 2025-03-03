@@ -1,8 +1,6 @@
-[gd_resource type="Resource" script_class="ArtifactData" load_steps=5 format=3 uid="uid://b1yy53qemibdt"]
+[gd_resource type="Resource" script_class="ArtifactData" load_steps=3 format=3 uid="uid://b1yy53qemibdt"]
 
 [ext_resource type="Script" path="res://Artifacts/artifacts.gd" id="1_1rn4q"]
-[ext_resource type="Resource" uid="uid://by5pn5f760ji0" path="res://RunePicking/Runes/rune_types/blank_rune.tres" id="1_15t2o"]
-[ext_resource type="Resource" uid="uid://chginwnxc0yre" path="res://RunePicking/Runes/rune_types/blank_rune_2.tres" id="2_avtdh"]
 [ext_resource type="Texture2D" uid="uid://b4xgowr6tumq" path="res://Assets/placeholder_customer_sprite.png" id="4_m42mi"]
 
 [resource]
@@ -12,5 +10,5 @@ sprite_resource_path = "res://Assets/placeholder_customer_sprite.png"
 sprite = ExtResource("4_m42mi")
 class_owners = []
 max_number_of_runes = 20
-rune_table = ["blank_rune", "blank_rune", "blank_rune2", "blank_rune2"]
-rune_map = Array[Array]([[ExtResource("1_15t2o"), Vector2(100, 100)], [ExtResource("2_avtdh"), Vector2(500, 500)], [ExtResource("1_15t2o"), Vector2(1000, 500)], [ExtResource("1_15t2o"), Vector2(400, 500)]])
+rune_table = ["basic_rune", "basic_rune", "basic_rune", "basic_rune"]
+rune_map = Array[Array]([["basic_rune", Vector2(100, 100)], ["basic_rune", Vector2(500, 500)], ["basic_rune", Vector2(1000, 500)], ["basic_rune", Vector2(400, 500)]])

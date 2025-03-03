@@ -21,7 +21,6 @@ func create_new_save_file():
 	var file = FileAccess.open("res://main/player_new_save.json", FileAccess.READ)
 	if file:
 		var content = JSON.parse_string(file.get_as_text())
-		data = content
 		save(content)
 	else:
 		push_error("File directory to initialize new content has changed!!!")
