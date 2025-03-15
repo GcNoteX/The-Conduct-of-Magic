@@ -2,7 +2,7 @@ class_name MainGameManager
 extends Node
 
 @onready var customer_service_shop: CustomerServiceGameManager = $CustomerService
-@onready var rune_picking_lab: RPArtifactManager = $RunePicking
+@onready var rune_picking_lab: RunePickingManager = $RunePicking
 @onready var main_menu: MainMenu = $MainMenu
 
 func _ready() -> void:

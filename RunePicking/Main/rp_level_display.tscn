@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnb37u7lbfh0d"]
+[gd_scene load_steps=5 format=3 uid="uid://bnb37u7lbfh0d"]
 
 [ext_resource type="Script" path="res://RunePicking/Main/rp_level_display.gd" id="1_l001y"]
+[ext_resource type="PackedScene" uid="uid://m6hdgs2og6tq" path="res://RunePicking/OtherMapElements/wall.tscn" id="3_2xcv2"]
 [ext_resource type="PackedScene" uid="uid://d164mj1wu1tmj" path="res://Player/rp_player.tscn" id="3_ilnnd"]
 [ext_resource type="PackedScene" uid="uid://baw6jx7bvw1cc" path="res://RunePicking/HUD/stamina_bar.tscn" id="5_3lhmy"]
 
@@ -14,6 +15,8 @@ unique_name_in_owner = true
 z_index = 1
 z_as_relative = false
 
+[node name="Area2D" parent="LevelPhysicsPlane" instance=ExtResource("3_2xcv2")]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
@@ -23,7 +26,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(1, 1, 1, 0)
+color = Color(0.844579, 0.937147, 0.95607, 0)
 
 [node name="StaminaBar" parent="CanvasLayer" instance=ExtResource("5_3lhmy")]
 z_as_relative = false

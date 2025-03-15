@@ -1,4 +1,4 @@
-class_name RPArtifactManager
+class_name RunePickingManager
 extends Node
 
 @export var full_commission_list: Array[CommissionData] = []
@@ -100,10 +100,9 @@ func _get_commission() -> CommissionData:
 func _on_test_remove_button_pressed() -> void:
 	_remove_commission()
 
-func _rune_map_exited(is_completed: bool, new_stamina_value: float) -> void:
-	player_data.mana = new_stamina_value
+func _rune_map_exited(is_completed: bool) -> void:
 	
-	info_box.text = str(new_stamina_value)
+	info_box.text = str(round(PlayerData.mana))
 	if is_completed:
 		var commission = _get_commission()
 		commission.is_completed = true

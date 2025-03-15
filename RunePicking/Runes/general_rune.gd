@@ -20,18 +20,6 @@ signal rune_activated(rune: GeneralRune)
 # Editor code
 func _ready() -> void:
 	rune_sprite.play("Sealed")
-	# Initialization, may make different sets based on collision shape in the future.
-	#if rune_data != null:
-		#rune_sprite.sprite_frames = rune_data.frames
-		#rune_sprite.modulate = rune_data.rune_modulate_color
-		#rune_collision_body.shape = rune_data.shape
-		#rune_collision_body.shape.radius = rune_data.radius
-		#activate_rune_sfx.stream = rune_data.awakened_sfx
-		#self.scale = Vector2(rune_data.scale, rune_data.scale)
-		#rune_sprite.play("Sealed")
-	#else:
-		#print("rune_data failed to export for ", self)
-		#self.queue_free()
 
 # Game code
 func awaken_rune() -> void:

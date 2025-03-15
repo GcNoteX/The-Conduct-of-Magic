@@ -17,7 +17,6 @@ func _ready() -> void:
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	# get previous position as current positon
 	self.visible = false
-	pass
 
 func _physics_process(delta: float) -> void:
 	if follow:
@@ -66,4 +65,3 @@ func disable_player_cursor() -> void:
 	self.visible = false
 	follow = false
 	self.collision_layer = 0
-	

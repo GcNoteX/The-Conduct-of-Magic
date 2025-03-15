@@ -40,7 +40,7 @@
 	#player.visible = true
 	#player_hitbox.disabled = true
 	#
-	#self.update_stamina_bar.connect(stamina_bar.update_stamina)
+	#self.update_stamina_bar.connect(stamina_bar.set_mana)
 	#
 	#for item in rune_map.runes:
 		#var rune = item as Rune

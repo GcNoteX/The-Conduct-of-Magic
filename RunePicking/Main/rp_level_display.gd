@@ -15,7 +15,7 @@ var passive_stamina_decrement: float = 3
 var playing = false
 
 
-signal exit_level_display(is_rune_map_completed: bool, new_stamina: float)
+signal exit_level_display(is_rune_map_completed: bool)
 
 func _ready() -> void:
 	# Construct Map
@@ -42,12 +42,11 @@ func _generate_rune_as_appropriate_class(rune_dir: String):
 
 func _rune_activated(rune_instance: GeneralRune) -> void:
 	number_of_activated_runes += 1
-	staminar_bar.increase_stamina_bar(rune_instance.stamina_recovered)
+	staminar_bar.increase_mana(rune_instance.stamina_recovered)
 	
 	if number_of_activated_runes == total_number_of_runes:
-		var new_stamina_value = staminar_bar.get_stamina_bar_value()
 		
-		_leave_level_display(true, new_stamina_value)
+		_leave_level_display(true)
 		
 
 func _process(delta: float) -> void:
@@ -66,15 +65,15 @@ func _process(delta: float) -> void:
 	if playing:
 		# Stamina draining
 		active_stamina_decrement = player_cursor.get_player_speed() * delta
-		staminar_bar.decrease_stamina_bar(active_stamina_decrement + passive_stamina_decrement * delta)
+		staminar_bar.decrease_mana(active_stamina_decrement + passive_stamina_decrement * delta)
 
-func _leave_level_display(is_rune_map_completed: bool, new_stamina_value: float) -> void:
+func _leave_level_display(is_rune_map_completed: bool) -> void:
 	# Pause for animations and view
 	playing = false
 	$LeaveDisplayTimer.start()
 	await $LeaveDisplayTimer.timeout
 	# Close the game
-	emit_signal("exit_level_display", is_rune_map_completed, new_stamina_value)
+	emit_signal("exit_level_display", is_rune_map_completed)
 
 func enable_play() -> void:
 	playing = true
@@ -83,3 +82,7 @@ func enable_play() -> void:
 func disable_play() -> void:
 	playing = false
 	player_cursor.disable_player_cursor()
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.

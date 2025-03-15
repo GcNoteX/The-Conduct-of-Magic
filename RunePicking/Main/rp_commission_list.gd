@@ -5,7 +5,7 @@ extends PanelContainer
 @onready var runes_display: RichTextLabel = $HBoxContainer/LeftSide/VBoxContainer/RunesPanel/RunesSpeculation
 @onready var commission_description: RichTextLabel = $HBoxContainer/RightSide/VBoxContainer/DescriptionPanel/MarginContainer/CommissionDescription
 @onready var origin_description: RichTextLabel = $HBoxContainer/RightSide/VBoxContainer/OriginPanel/MarginContainer/OriginDescription
-@onready var time_display : RichTextLabel = $HBoxContainer/RightSide/VBoxContainer/CostTimePanel/CostTimeSeperator/Time
+@onready var due_date_display : RichTextLabel = $HBoxContainer/RightSide/VBoxContainer/CostTimePanel/CostTimeSeperator/Time
 @onready var cost_display: RichTextLabel = $HBoxContainer/RightSide/VBoxContainer/CostTimePanel/CostTimeSeperator/Cost
 @onready var back_button: Button = $MarginContainer1/LeftButton
 @onready var next_button: Button = $MarginContainer2/RightButton
@@ -27,7 +27,7 @@ func _update_commission_display(commission: CommissionData) -> void:
 	runes_display.text = commission.speculative_runes
 	commission_description.text = commission.artifact_description
 	origin_description.text = commission.artifact_origin
-	time_display.text = str(commission.commission_due_date)
+	due_date_display.text = str(commission.commission_due_date)
 	cost_display.text = str(commission.reward)
 	
 func display_no_commission() -> void:
@@ -35,7 +35,7 @@ func display_no_commission() -> void:
 	runes_display.text = "none"
 	commission_description.text = "none"
 	origin_description.text = "none"
-	time_display.text = "none"
+	due_date_display.text = "none"
 	cost_display.text = "none"
 
 func display_commission(new_commission_number: int) -> void:

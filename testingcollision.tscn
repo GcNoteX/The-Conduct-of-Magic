@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmridwonweaoa"]
+
+[ext_resource type="Script" path="res://RunePicking/Main/character_body_2d.gd" id="1_0mo2l"]
+[ext_resource type="Texture2D" uid="uid://b4xgowr6tumq" path="res://Assets/placeholder_customer_sprite.png" id="2_knfjr"]
+[ext_resource type="Texture2D" uid="uid://fnaut078dai" path="res://Assets/icon.svg" id="4_dlgpb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cewsh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vux4l"]
+size = Vector2(572, 239)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(501, 165)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_0mo2l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_cewsh")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("2_knfjr")
+
+[node name="Area2D" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+position = Vector2(501, 350.5)
+scale = Vector2(4.46875, 1.85156)
+texture = ExtResource("4_dlgpb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+self_modulate = Color(0.533333, 0.8, 0.54902, 1)
+position = Vector2(500, 350)
+shape = SubResource("RectangleShape2D_vux4l")
