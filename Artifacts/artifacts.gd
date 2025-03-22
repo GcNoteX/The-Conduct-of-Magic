@@ -8,7 +8,7 @@ extends Resource
 
 @export_category("Possible Class of Owners")
 @export var class_owners: Array
-
+# I Added a comment here
 @export_category("Artifact Runes")
 @export var max_number_of_runes: int
 @export var rune_table: Array # Or the number of runes runs out first
